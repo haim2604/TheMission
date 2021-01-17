@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ikarosoft.themission.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/newUserFragment"
+        android:name="com.ikarosoft.themission.NewUserFragment"
+        android:label="fragment_new_user"
+        tools:layout="@layout/fragment_new_user" />
+    <fragment
+        android:id="@+id/allMissionFragment"
+        android:name="com.ikarosoft.themission.AllMissionFragment"
+        android:label="fragment_all_mission"
+        tools:layout="@layout/fragment_all_mission" />
+    <fragment
+        android:id="@+id/perframTaskFragment"
+        android:name="com.ikarosoft.themission.PerframTaskFragment"
+        android:label="fragment_perfram_task"
+        tools:layout="@layout/fragment_perfram_task" />
+    <fragment
+        android:id="@+id/newMissionFragment"
+        android:name="com.ikarosoft.themission.NewMissionFragment"
+        android:label="fragment_new_mission"
+        tools:layout="@layout/fragment_new_mission" />
+    <fragment
+        android:id="@+id/allProjectsFragment"
+        android:name="com.ikarosoft.themission.AllProjectsFragment"
+        android:label="fragment_all_projects"
+        tools:layout="@layout/fragment_all_projects" />
+    <fragment
+        android:id="@+id/newProjectFragment"
+        android:name="com.ikarosoft.themission.NewProjectFragment"
+        android:label="fragment_new_project"
+        tools:layout="@layout/fragment_new_project" />
+</navigation>
