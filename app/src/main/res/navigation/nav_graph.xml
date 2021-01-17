@@ -61,5 +61,10 @@
         android:id="@+id/newProjectFragment"
         android:name="com.ikarosoft.themission.NewProjectFragment"
         android:label="fragment_new_project"
-        tools:layout="@layout/fragment_new_project" />
+        tools:layout="@layout/fragment_new_project" >
+        <action
+            android:id="@+id/action_newProjectFragment_pop"
+            app:popUpTo="@id/allProjectsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

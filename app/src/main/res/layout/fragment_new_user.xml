@@ -10,11 +10,19 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="new user"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/newuser_btn_adduser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add user"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="151dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,12 +36,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        newUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_login_to_newUser);
-            }
-        });
+        newUserBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_login_to_newUser));
+
+       
 
         return  view;
     }
