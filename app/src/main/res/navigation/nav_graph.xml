@@ -10,7 +10,14 @@
         android:id="@+id/loginFragment"
         android:name="com.ikarosoft.themission.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_newUser"
+            app:destination="@id/newUserFragment" />
+        <action
+            android:id="@+id/action_login_to_allMission"
+            app:destination="@id/allMissionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newUserFragment"
         android:name="com.ikarosoft.themission.NewUserFragment"
@@ -20,7 +27,17 @@
         android:id="@+id/allMissionFragment"
         android:name="com.ikarosoft.themission.AllMissionFragment"
         android:label="fragment_all_mission"
-        tools:layout="@layout/fragment_all_mission" />
+        tools:layout="@layout/fragment_all_mission" >
+        <action
+            android:id="@+id/action_allMission_to_perframTask"
+            app:destination="@id/perframTaskFragment" />
+        <action
+            android:id="@+id/action_allMission_to_newMission"
+            app:destination="@id/newMissionFragment" />
+        <action
+            android:id="@+id/action_allMission_to_allProjects"
+            app:destination="@id/allProjectsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/perframTaskFragment"
         android:name="com.ikarosoft.themission.PerframTaskFragment"
@@ -35,7 +52,11 @@
         android:id="@+id/allProjectsFragment"
         android:name="com.ikarosoft.themission.AllProjectsFragment"
         android:label="fragment_all_projects"
-        tools:layout="@layout/fragment_all_projects" />
+        tools:layout="@layout/fragment_all_projects" >
+        <action
+            android:id="@+id/action_allProjects_to_newProject"
+            app:destination="@id/newProjectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newProjectFragment"
         android:name="com.ikarosoft.themission.NewProjectFragment"
