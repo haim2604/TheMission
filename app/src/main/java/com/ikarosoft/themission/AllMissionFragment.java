@@ -34,6 +34,8 @@ public class AllMissionFragment extends Fragment {
 
         Button replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         Button addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
+
+
         listMission = view.findViewById(R.id.allmission_recyclerView);
         listMission.hasFixedSize();
         listMission.setHasFixedSize(true);
@@ -103,11 +105,11 @@ public class AllMissionFragment extends Fragment {
 
         public void bindData(MyTask task,int position) {
             this.position = position;
-            tv.setText("a"+task.getNameTask());
+           // tv.setText("a"+task.getNameTask());
           //  numberTask.setText(" assss ");
-           // numberTask.setText(" assss "+task.getNumberTask());
-          //  nameTask.setText(" assss "+task.getNameTask());
-          //  statusTask.setText(" assss "+task.getStatusTask());
+            numberTask.setText(task.getNumberTask());
+           nameTask.setText(" assss "+task.getNameTask());
+          statusTask.setText(" assss "+task.getStatusTask());
         }
     }
     interface OnItemClickListener{
@@ -126,7 +128,7 @@ public class AllMissionFragment extends Fragment {
         public MissViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             //viewType if i have diffrent view
 
-            View view = getLayoutInflater().inflate(R.layout.list_row,null);
+            View view = getLayoutInflater().inflate(R.layout.missiionlist_row,null);
             MissViewHolder holder = new MissViewHolder(view);
             holder.listener = listener;
             return holder;
