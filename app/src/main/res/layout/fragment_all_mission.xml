@@ -8,30 +8,45 @@
     tools:context=".AllMissionFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allmission_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toTopOf="@+id/allproj_btn_newproj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/allproj_btn_newproj"
         android:layout_width="98dp"
         android:layout_height="88dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="576dp"
         android:layout_marginEnd="16dp"
         android:background="@android:drawable/ic_input_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/allmission_btn_proje_replace"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-
     <Button
         android:id="@+id/allmission_btn_proje_replace"
         android:layout_width="97dp"
         android:layout_height="93dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="240dp"
         android:layout_marginEnd="8dp"
         android:background="@android:drawable/stat_notify_sync_noanim"
         app:layout_constraintEnd_toStartOf="@+id/allproj_btn_newproj"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/allmission_recyclerView" />
 
     <TextView
         android:id="@+id/textView3"

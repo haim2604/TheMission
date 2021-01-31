@@ -10,20 +10,61 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:id="@+id/login_btn_connect"
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="50dp"
-        android:text="התחבר"
-        android:textSize="30sp"
-        app:backgroundTint="@color/m_grean"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="TODO"
+        android:textColor="@color/m_grean"
+        android:textSize="120sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/w1"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:layout_constraintDimensionRatio="7:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/w1"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPersonName|textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn_connect"
+        app:layout_constraintDimensionRatio="7:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <Button
         android:id="@+id/login_btn_new"
@@ -40,60 +81,24 @@
         app:backgroundTint="#007AFFC6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn_connect" />
 
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <Button
+        android:id="@+id/login_btn_connect"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/w1"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        app:layout_constraintDimensionRatio="7:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="50dp"
-        android:background="@drawable/w1"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPersonName|textPassword"
-        app:layout_constraintDimensionRatio="7:1"
+        android:text="התחבר"
+        android:textSize="30sp"
+        app:backgroundTint="@color/m_grean"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn_new"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:text="TODO"
-        android:textColor="@color/m_grean"
-        android:textSize="120sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
