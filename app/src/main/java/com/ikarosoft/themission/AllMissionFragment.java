@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ikarosoft.themission.adapters.MyAdapter;
 import com.ikarosoft.themission.model.MyTask;
 import com.ikarosoft.themission.model.TaskModel;
 
@@ -47,12 +48,15 @@ public class AllMissionFragment extends Fragment {
 
         data = TaskModel.instance.getAllTask();
 
-        MissAdapter adapter = new MissAdapter();
+        MyAdapter adapter = new MyAdapter(data,getLayoutInflater());
+        //MissAdapter adapter = new MissAdapter();
         listMission.setAdapter(adapter);
 
-        adapter.setOnClickListener(new OnItemClickListener() {
+        adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
+
                 Log.d("TAG123","aaaa  "+position);
             }
         });
@@ -78,74 +82,84 @@ public class AllMissionFragment extends Fragment {
         return view;
     }
 
-    class MissViewHolder extends RecyclerView.ViewHolder{
-        public OnItemClickListener listener;
-        TextView numberTask,nameTask,statusTask;
-        TextView tv;
-        ImageView imageTask;
-        int position;
-
-
-        public MissViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            tv= itemView.findViewById(R.id.tv2);
-            numberTask =itemView.findViewById(R.id.missionrow_number_tv);
-            nameTask=itemView.findViewById(R.id.missionrow_name_tv);
-            statusTask=itemView.findViewById(R.id.missionrow_status_tv);
-            imageTask =itemView.findViewById(R.id.missionrow_avatar_iv);;
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(position);
-                }
-            });
-        }
-
-        public void bindData(MyTask task,int position) {
-            this.position = position;
-           // tv.setText("a"+task.getNameTask());
-          //  numberTask.setText(" assss ");
-            numberTask.setText(task.getNumberTask());
-           nameTask.setText(" assss "+task.getNameTask());
-          statusTask.setText(" assss "+task.getStatusTask());
-        }
-    }
-    interface OnItemClickListener{
-        void onItemClick(int position);
-    }
-
-
-    class MissAdapter extends RecyclerView.Adapter<MissViewHolder>{
-        private OnItemClickListener listener;
-
-        void setOnClickListener(OnItemClickListener listener){
-            this.listener= listener;
-        }
-        @NonNull
-        @Override
-        public MissViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            //viewType if i have diffrent view
-
-            View view = getLayoutInflater().inflate(R.layout.missiionlist_row,null);
-            MissViewHolder holder = new MissViewHolder(view);
-            holder.listener = listener;
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MissViewHolder holder, int position) {
-            MyTask task = data.get(position);
-
-            holder.bindData(task,position);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-        }
-    }
+//    class MissViewHolder extends RecyclerView.ViewHolder{
+//
+//
+//        public OnItemClickListener listener;
+//        TextView numberTask,nameTask,statusTask;
+//        TextView tv;
+//        ImageView imageTask;
+//        int position;
+//
+//
+//        public MissViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
+//            super(itemView);
+//
+//            tv= itemView.findViewById(R.id.tv2);
+//            numberTask =itemView.findViewById(R.id.missionrow_number_tv);
+//            nameTask=itemView.findViewById(R.id.missionrow_name_tv);
+//            statusTask=itemView.findViewById(R.id.missionrow_status_tv);
+//            imageTask =itemView.findViewById(R.id.missionrow_avatar_iv);;
+//
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if(listener!=null){
+//                        int position = getAdapterPosition();
+//                        if (position != RecyclerView.NO_POSITION){
+//                            listener.onItemClick(position);
+//                        }
+//                    }
+//                   //4 MissViewHolder.this.listener.onItemClick(position);
+//                }
+//            });
+//        }
+//
+//        public void bindData(MyTask task,int position) {
+//            this.position = position;
+//           // tv.setText("a"+task.getNameTask());
+//          //  numberTask.setText(" assss ");
+//            Log.d("TAG4",task.getNumberTask());
+//            numberTask.setText(task.getNumberTask());
+//           nameTask.setText(task.getNumberTask());
+//          statusTask.setText(task.getStatusTask());
+//        }
+//    }
+//    interface OnItemClickListener{
+//        void onItemClick(int position);
+//    }
+//
+//
+//    class MissAdapter extends RecyclerView.Adapter<MissViewHolder>{
+//        private OnItemClickListener listener;
+//        void setOnClickListener(OnItemClickListener listener){
+//            this.listener= listener;
+//        }
+//
+//
+//        @NonNull
+//        @Override
+//        public MissViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            //viewType if i have diffrent view
+//
+//            View view = getLayoutInflater().inflate(R.layout.missiionlist_row,null);
+//            MissViewHolder holder = new MissViewHolder(view,listener);//1
+//           //2 holder.listener = listener;
+//            return holder;
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull MissViewHolder holder, int position) {
+//            MyTask task = data.get(position);
+//
+//            holder.bindData(task,position);
+//
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return data.size();
+//        }
+//    }
 
 }
