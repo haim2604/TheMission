@@ -33,6 +33,10 @@ public class AllMissionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_mission, container, false);
 
+        String idd= AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
+        MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
+        Log.d("TAGAr",idd+"  "+task.getNameTask());
+
         Button replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         Button addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
 

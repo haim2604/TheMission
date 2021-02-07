@@ -1,6 +1,8 @@
 package com.ikarosoft.themission.model;
 
-public class MyTask {
+import java.io.Serializable;
+
+public class MyTask implements Serializable {
 
     String nameTask;
     String statusTask;

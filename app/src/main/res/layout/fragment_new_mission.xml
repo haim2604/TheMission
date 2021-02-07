@@ -24,17 +24,17 @@
         app:layout_constraintTop_toBottomOf="@+id/newmission_evrybody_cb" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
-        android:layout_width="wrap_content"
+        android:id="@+id/newmission_name_et"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:textColorLink="@color/m_bluedark"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="0.2"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="@+id/textView10" />
 
@@ -62,13 +62,13 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:text="mission name"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName4"
+        app:layout_constraintEnd_toStartOf="@+id/newmission_name_et"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="user 1"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/newmission_user2_cb"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/newmission_user2_cb"
@@ -104,6 +105,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:text="user 2"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/newmission_user1_cb"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
@@ -116,9 +118,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="user 3"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent=".4"
-        app:layout_constraintTop_toBottomOf="@+id/newmission_user2_cb" />
+        app:layout_constraintTop_toBottomOf="@+id/newmission_user2_cb"
+        app:layout_constraintWidth_percent=".4" />
 
     <CheckBox
         android:id="@+id/newmission_user4_cb"
@@ -127,6 +130,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:text="user 4"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/newmission_user3_cb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/newmission_user3_cb"
@@ -140,6 +144,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="60dp"
         android:text="evrybody"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newmission_user3_cb" />

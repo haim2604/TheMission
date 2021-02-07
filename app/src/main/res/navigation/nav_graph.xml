@@ -37,6 +37,14 @@
         <action
             android:id="@+id/action_allMission_to_allProjects"
             app:destination="@id/allProjectsFragment" />
+        <argument android:name="userd"
+            app:argType="string" />
+        <argument
+            android:name="named"
+            app:argType="string" />
+        <argument
+            android:name="tes"
+            app:argType="com.ikarosoft.themission.model.MyTask" />
     </fragment>
     <fragment
         android:id="@+id/perframTaskFragment"
@@ -64,7 +72,7 @@
         tools:layout="@layout/fragment_new_project" >
         <action
             android:id="@+id/action_newProjectFragment_pop"
-            app:popUpTo="@id/allProjectsFragment"
+            app:popUpTo="@id/allMissionFragment"
             app:popUpToInclusive="false" />
     </fragment>
 </navigation>
