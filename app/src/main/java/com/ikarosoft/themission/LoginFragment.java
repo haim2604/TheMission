@@ -69,16 +69,24 @@ public class LoginFragment extends Fragment {
         });
 
         User user = new User();
-        user.setName("nammma2");
-        user.setImageUrl("urlll");
-        user.setPassword("passss2");
-        user.setPhone("1231235sfa");
+        user.setName("nam4");
+        user.setImageUrl("urll34l");
+        user.setPassword("passsswppoooooo");
+        user.setPhone("054123456");
         UserModelClass.instance.addUser(user, new UserModelClass.AddUserListener() {
             @Override
-            public void onComlete() {
+            public void onComplete() {
                 Log.d("TAGAD","addddddd   ");
             }
         });
+
+        UserModelClass.instance.getUserByPhone("054123456" , new UserModelClass.GetUserListener() {
+            @Override
+            public void onComplete(User user) {
+                Log.d("TAGUSERRR",user.getName());
+            }
+        }) ;
+
 
 
         //end usermodelclase save local in room

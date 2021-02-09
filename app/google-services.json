@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "322791327434",
+    "project_id": "the-mission-8ee4e",
+    "storage_bucket": "the-mission-8ee4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322791327434:android:343481fae614fcd6b21633",
+        "android_client_info": {
+          "package_name": "com.ikarosoft.themission"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322791327434-9m5hu7ativnqmr7gbkq1e2jten0n440s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGdGXBDRHLLoSWJqajIsd1AdtV0Z4OWX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322791327434-9m5hu7ativnqmr7gbkq1e2jten0n440s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

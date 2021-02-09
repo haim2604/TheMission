@@ -7,71 +7,54 @@ import java.util.List;
 
 public class UserModelClass {
     public final static UserModelClass instance = new UserModelClass();
+    UserModelSqlClass sqlClass = new UserModelSqlClass();
+    UserModelFirebaseClass modelfirebaseClass = new UserModelFirebaseClass();
+
+
     private UserModelClass(){
 
     }
 
-    public interface GetAllUserListener{
-        void onComplete(List<User>data);
+    public void getUserByPhone(String phone, GetUserListener listener) {
+        modelfirebaseClass.getUserByPhone(phone,listener);
     }
 
 
+    public interface MListener<T>{
+        void onComplete(T result);
+    }
+
+    public interface GetAllUserListener extends MListener<List<User>>{};
+
+
+    public interface GetUserListener{
+        void onComplete(User user);
+    }
+
+//TODO l;fsfs;
     public void getAllUser(GetAllUserListener listener){
-        class MyAsyncTask extends AsyncTask{
-            List<User> data;
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                data = AppLocalDB.db.userDao().getAllUser();
-                return null;
-            }
+         //sqlClass.getAllUser(listener);
+       modelfirebaseClass.getAllUser(listener);
 
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                listener.onComplete(data);
-
-            }
-        }
-        MyAsyncTask task = new MyAsyncTask();
-        task.execute();
-
-      /*  AsyncTask task1 = new AsyncTask() {
-            List<User> data;
-
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                data = AppLocalDB.db.userDao().getAllUser();
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                listener.onComplete(data);
-
-            }
-        }.execute();*/
      }
 
      public interface AddUserListener{
-        void onComlete();
+        void onComplete();
      }
-    public void addUser(User user,AddUserListener listener){
-        @SuppressLint("StaticFieldLeak")
-        AsyncTask task = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                AppLocalDB.db.userDao().insertAll(user);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                listener.onComlete();
 
-            }
-        }.execute();
+
+
+
+
+    public void addUser(User user,AddUserListener listener){
+        modelfirebaseClass.addUser(user,listener);
 
     }
 
+    interface DeleteListener extends AddUserListener{};
+
+    public void deleteUser(User user,DeleteListener listener){
+        modelfirebaseClass.deleteUser(user,listener);
+    }
     //all function - delete ,update...and more
 }
