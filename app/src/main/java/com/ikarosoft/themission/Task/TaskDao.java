@@ -25,4 +25,7 @@ public interface TaskDao {
     void delete(MyTask myTask);
 
 
+    @Query("DELETE FROM MyTask")
+    public void nukeTable();
+
 }

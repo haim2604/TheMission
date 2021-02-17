@@ -62,19 +62,17 @@ public class LoginFragment extends Fragment {
         //start usermodelclase save local in room
 
 
-        UserModel.instance.getAllUser(new MyListener<List<User>>() {
-            @Override
-            public void onComplete(List<User> result) {
-                userList= result;
-                for (User us:userList ) {
-                    Log.d("TAGRoom...d",us.getName()+" "+us.getPassword());
-                    Log.i("TAGRoom...i",us.getName()+" "+us.getPassword());
-                    Log.v("TAGRoom...v",us.getName()+" "+us.getPassword());
-                }
-            }
-
-
-        });
+//        UserModel.instance.getAllUser(new MyListener<List<User>>() {
+//            @Override
+//            public void onComplete(List<User> result) {
+//                userList= result;
+//                for (User us:userList ) {
+//                    Log.d("TAGRoom...d",us.getName()+" "+us.getPassword());
+//                    Log.i("TAGRoom...i",us.getName()+" "+us.getPassword());
+//                    Log.v("TAGRoom...v",us.getName()+" "+us.getPassword());
+//                }
+//            }
+//        });
 
 
 
@@ -90,38 +88,19 @@ public class LoginFragment extends Fragment {
 //        });
 
 
-        MyTask myTask = new MyTask("add","start","0501","26");
-        MyTask myTask1 = new MyTask("add","start","0507","26");
-        MyTask myTask2 = new MyTask("add","start","0503","26");
-        MyTask myTask3 = new MyTask("add","start","0504","26");
-
-        TaskModel.instance.addTask(myTask, new ListenerVoid() {
-            @Override
-            public void onComplete() {
-                    Log.d("TAGTaskADD","addddddd   ");
-            }
-        });
-
-//        TaskModel.instance.addTask(myTask2, new ListenerVoid() {
+//        MyTask myTask = new MyTask("add","start","0501","26");
+//
+//
+//        TaskModel.instance.addTask(myTask, new ListenerVoid() {
 //            @Override
 //            public void onComplete() {
-//                Log.d("TAGTaskADD","addddddd   ");
-//            }
-//        });
-//        TaskModel.instance.addTask(myTask1, new ListenerVoid() {
-//            @Override
-//            public void onComplete() {
-//                Log.d("TAGTaskADD","addddddd   ");
-//            }
-//        });
-//        TaskModel.instance.addTask(myTask3, new ListenerVoid() {
-//            @Override
-//            public void onComplete() {
-//                Log.d("TAGTaskADD","addddddd   ");
+//                    Log.d("TAGTaskADD","addddddd   ");
 //            }
 //        });
 
 
+
+/*
         User user = new User();
         user.setName("nam4");
         user.setImageUrl("urll34l");
@@ -139,7 +118,7 @@ public class LoginFragment extends Fragment {
             public void onComplete(User user) {
                 Log.d("TAGUSERRR",user.getName());
             }
-        }) ;
+        }) ;*/
 
 
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MissionAdapterViewModel;
 import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.R;
@@ -29,6 +31,9 @@ public class AllMissionFragment extends Fragment {
     RecyclerView listMission;
     MissionAdapterViewModel viewModel;
     MyAdapter adapter = null;
+    SwipeRefreshLayout sref;
+
+
 
     Button replaceBtn ;
     Button addMissionBtn;
@@ -48,7 +53,16 @@ public class AllMissionFragment extends Fragment {
 
         replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
+        sref = view.findViewById(R.id.allmission_swipe);
 
+        sref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                sref.setRefreshing(true);
+                reloadData();
+
+            }
+        });
 
         listMission = view.findViewById(R.id.allmission_recyclerView);
         listMission.hasFixedSize();
@@ -78,14 +92,14 @@ public class AllMissionFragment extends Fragment {
 //        });
 
 
-//        adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
-//
-//                Log.d("TAG123","aaaa  "+position);
-//            }
-//        });
+        adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
+
+                Log.d("TAG123","aaaa  "+position);
+            }
+        });
 
 
 
@@ -104,7 +118,6 @@ public class AllMissionFragment extends Fragment {
             }
         });
 
-        reloadData();
         viewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<MyTask>>() {
             @Override
             public void onChanged(List<MyTask> myTasks) {
@@ -121,13 +134,15 @@ public class AllMissionFragment extends Fragment {
     private void reloadData() {
         addMissionBtn.setEnabled(false);
         replaceBtn.setEnabled(false);
-        TaskModel.instance.refreshAllTask(new MyListener<List<MyTask>>() {
+        TaskModel.instance.refreshAllTask(new ListenerVoid() {
             @Override
-            public void onComplete(List<MyTask> result) {
+            public void onComplete() {
                // adapter = new MyAdapter(viewModel,getLayoutInflater());
                // listMission.setAdapter(adapter);
                 addMissionBtn.setEnabled(true);
                 replaceBtn.setEnabled(true);
+                sref.setRefreshing(false);
+
             }
         });
 

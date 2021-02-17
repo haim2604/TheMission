@@ -35,13 +35,15 @@ public class TaskModel {
     public LiveData<List<MyTask>> getAllTask(){
         if (taskList== null){
             taskList = modelSql.getAllTask();
+
+
             refreshAllTask(null);
         }
         // modelSql.getAllTask(listener);
         return  taskList;
     }
 
-    public void refreshAllTask(final MyListener<List<MyTask>> listener){
+    public void refreshAllTask(final ListenerVoid listener){
         //1.get local last updeat data
 
         SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
@@ -56,7 +58,7 @@ public class TaskModel {
 
                 //3.insret the new updete to local db
                 for (MyTask t:result) {
-                    modelSql.addTask(t,null);
+                modelSql.addTask(t,null);
                     if(t.getLastUpdated()>lastU){
                         lastU=t.getLastUpdated();
                     }
@@ -66,7 +68,7 @@ public class TaskModel {
 
                 //5.return the update data to the listeners
                 if(listener != null){
-                    listener.onComplete(null);
+                    listener.onComplete();
                 }
 
             }
@@ -95,7 +97,17 @@ public class TaskModel {
     }
 
     public void addTask(MyTask myTask, ListenerVoid listener){
-       modelFirebase.addTask(myTask,listener);
+       modelFirebase.addTask(myTask, new ListenerVoid() {
+           @Override
+           public void onComplete() {
+                refreshAllTask(new ListenerVoid() {
+                    @Override
+                    public void onComplete() {
+                        listener.onComplete();
+                    }
+                });
+           }
+       });
         //modelSql.addTask(myTask,listener);
     }
 

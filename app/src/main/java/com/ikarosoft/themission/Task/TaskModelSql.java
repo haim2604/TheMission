@@ -22,7 +22,24 @@ public class TaskModelSql {
 
     }
 
+
+
     public LiveData<List<MyTask>> getAllTask() {
+//        @SuppressLint("StaticFieldLeak")
+//        AsyncTask task = new AsyncTask() {
+//            @Override
+//            protected Object doInBackground(Object[] objects) {
+//                AppLocalDB.db.taskDao().nukeTable();
+//                return null;
+//            }
+//            @Override
+//            protected void onPostExecute(Object o) {
+//                super.onPostExecute(o);
+//
+//
+//            }
+//        }.execute();
+
         return AppLocalDB.db.taskDao().getAllTask();
     }
 
@@ -38,13 +55,39 @@ public class TaskModelSql {
             @Override
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);
-                listener.onComplete();
+                if (listener!=null){
+                    listener.onComplete();
+
+                }
 
             }
         }.execute();
         Log.d("TAGSQL","ADDDDDDD");
 
     }
+
+
+    public void deleteTask(MyTask myTask){
+        @SuppressLint("StaticFieldLeak")
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                AppLocalDB.db.taskDao().delete(myTask);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                Log.d("TAGDELLLLL","DA:::::::::");
+
+
+
+            }
+        }.execute();
+
+
+    }
+
 
     //all function - delete ,update...and more
 }

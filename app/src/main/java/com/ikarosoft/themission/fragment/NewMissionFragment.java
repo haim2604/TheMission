@@ -57,7 +57,7 @@ public class NewMissionFragment extends Fragment {
         String randomNum = ""+rand.nextInt(((max - min) + 1) + min);
 
         viewModel.setNumberTask(viewModel.getNumProject()+"_"+viewModel.getNameTask()+randomNum);
-        MyTask task = new MyTask(viewModel.getNameTask(),"start","0502" ,viewModel.getNumProject(),viewModel.getNumProject());
+        MyTask task = new MyTask(viewModel.getNameTask(),"start","0502" ,viewModel.getNumProject(),viewModel.getNumberTask());
 
         Log.d("TAGRAND",randomNum+"............."+viewModel.getNumberTask());
         TaskModel.instance.addTask(task, new ListenerVoid() {
