@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.ikarosoft.themission.LoginFragment"
+        android:name="com.ikarosoft.themission.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/newUserFragment"
-        android:name="com.ikarosoft.themission.NewUserFragment"
+        android:name="com.ikarosoft.themission.fragment.NewUserFragment"
         android:label="fragment_new_user"
         tools:layout="@layout/fragment_new_user" />
     <fragment
         android:id="@+id/allMissionFragment"
-        android:name="com.ikarosoft.themission.AllMissionFragment"
+        android:name="com.ikarosoft.themission.fragment.AllMissionFragment"
         android:label="fragment_all_mission"
         tools:layout="@layout/fragment_all_mission" >
         <action
@@ -44,21 +44,21 @@
             app:argType="string" />
         <argument
             android:name="tes"
-            app:argType="com.ikarosoft.themission.model.MyTask" />
+            app:argType="com.ikarosoft.themission.Task.MyTask" />
     </fragment>
     <fragment
         android:id="@+id/perframTaskFragment"
-        android:name="com.ikarosoft.themission.PerframTaskFragment"
+        android:name="com.ikarosoft.themission.fragment.PerframTaskFragment"
         android:label="fragment_perfram_task"
         tools:layout="@layout/fragment_perfram_task" />
     <fragment
         android:id="@+id/newMissionFragment"
-        android:name="com.ikarosoft.themission.NewMissionFragment"
+        android:name="com.ikarosoft.themission.fragment.NewMissionFragment"
         android:label="fragment_new_mission"
         tools:layout="@layout/fragment_new_mission" />
     <fragment
         android:id="@+id/allProjectsFragment"
-        android:name="com.ikarosoft.themission.AllProjectsFragment"
+        android:name="com.ikarosoft.themission.fragment.AllProjectsFragment"
         android:label="fragment_all_projects"
         tools:layout="@layout/fragment_all_projects" >
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/newProjectFragment"
-        android:name="com.ikarosoft.themission.NewProjectFragment"
+        android:name="com.ikarosoft.themission.fragment.NewProjectFragment"
         android:label="fragment_new_project"
         tools:layout="@layout/fragment_new_project" >
         <action

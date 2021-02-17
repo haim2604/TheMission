@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.model.MyProject;
-import com.ikarosoft.themission.model.MyTask;
 
 import java.util.List;
 

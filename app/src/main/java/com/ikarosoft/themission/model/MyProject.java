@@ -1,5 +1,7 @@
 package com.ikarosoft.themission.model;
 
+import com.ikarosoft.themission.User.User;
+
 public class MyProject {
     String name;
     String number;

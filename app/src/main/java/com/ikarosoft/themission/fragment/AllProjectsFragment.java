@@ -1,4 +1,4 @@
-package com.ikarosoft.themission;
+package com.ikarosoft.themission.fragment;
 
 import android.os.Bundle;
 
@@ -13,12 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.ikarosoft.themission.adapters.MyAdapter;
+import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.adapters.ProjectAdapter;
 import com.ikarosoft.themission.model.MyProject;
-import com.ikarosoft.themission.model.MyTask;
 import com.ikarosoft.themission.model.ProjectModel;
-import com.ikarosoft.themission.model.TaskModel;
 
 import java.util.List;
 

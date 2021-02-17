@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.model.MyTask;
+import com.ikarosoft.themission.Task.MyTask;
 
 public class MissionViewHolder extends MyViewHolder   {
     public MyAdapter.OnItemClickListener listener;
@@ -45,7 +45,7 @@ public class MissionViewHolder extends MyViewHolder   {
         //  numberTask.setText(" assss ");
         Log.d("TAG4",task.getNumberTask());
         numberTask.setText(task.getNumberTask());
-        nameTask.setText(task.getNumberTask());
+        nameTask.setText(task.getNameTask());
         statusTask.setText(task.getStatusTask());
     }
 }

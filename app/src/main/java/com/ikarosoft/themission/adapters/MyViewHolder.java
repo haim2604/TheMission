@@ -1,15 +1,11 @@
 package com.ikarosoft.themission.adapters;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.model.MyTask;
+import com.ikarosoft.themission.Task.MyTask;
 
 public abstract class MyViewHolder extends RecyclerView.ViewHolder   {
 //    public MyAdapter.OnItemClickListener listener;

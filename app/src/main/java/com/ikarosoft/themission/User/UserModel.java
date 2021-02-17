@@ -1,17 +1,19 @@
-package com.ikarosoft.themission.model;
+package com.ikarosoft.themission.User;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
+import android.graphics.Bitmap;
+
+import com.ikarosoft.themission.MyListener;
 
 import java.util.List;
 
-public class UserModelClass {
-    public final static UserModelClass instance = new UserModelClass();
+public class UserModel {
+    public final static UserModel instance = new UserModel();
     UserModelSqlClass sqlClass = new UserModelSqlClass();
     UserModelFirebaseClass modelfirebaseClass = new UserModelFirebaseClass();
 
+    UserModelFirebase userModelFirebase = new UserModelFirebase();
 
-    private UserModelClass(){
+    private UserModel(){
 
     }
 
@@ -32,10 +34,11 @@ public class UserModelClass {
     }
 
 //TODO l;fsfs;
-    public void getAllUser(GetAllUserListener listener){
+//public void getAllUser(GetAllUserListener listener){
+    public void getAllUser(MyListener<List<User>> listener){
          //sqlClass.getAllUser(listener);
-       modelfirebaseClass.getAllUser(listener);
-
+      // modelfirebaseClass.getAllUser(listener);
+       userModelFirebase.getAllUser(listener);
      }
 
      public interface AddUserListener{
@@ -53,8 +56,17 @@ public class UserModelClass {
 
     interface DeleteListener extends AddUserListener{};
 
-    public void deleteUser(User user,DeleteListener listener){
+    public void deleteUser(User user, DeleteListener listener){
         modelfirebaseClass.deleteUser(user,listener);
     }
     //all function - delete ,update...and more
-}
+
+    public interface UploadImageListener{
+        void onComplate(String url);
+    }
+
+    public  void uploadImage(Bitmap bitmap, String name, final UploadImageListener listener){
+        modelfirebaseClass.uploadImage(bitmap,name,listener);
+    }
+
+    }

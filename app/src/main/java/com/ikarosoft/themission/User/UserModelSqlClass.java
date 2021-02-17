@@ -1,7 +1,9 @@
-package com.ikarosoft.themission.model;
+package com.ikarosoft.themission.User;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+
+import com.ikarosoft.themission.AppLocalDB;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class UserModelSqlClass {
     }
 
 
-    public void getAllUser(UserModelClass.GetAllUserListener listener){
+    public void getAllUser(UserModel.GetAllUserListener listener){
         class MyAsyncTask extends AsyncTask {
             List<User> data;
             @Override
@@ -57,7 +59,7 @@ public class UserModelSqlClass {
     public interface AddUserListener{
         void onComlete();
     }
-    public void addUser(User user, UserModelClass.AddUserListener listener){
+    public void addUser(User user, UserModel.AddUserListener listener){
         @SuppressLint("StaticFieldLeak")
         AsyncTask task = new AsyncTask() {
             @Override

@@ -1,4 +1,4 @@
-package com.ikarosoft.themission.model;
+package com.ikarosoft.themission.User;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

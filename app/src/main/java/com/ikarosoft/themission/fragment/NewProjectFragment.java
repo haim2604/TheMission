@@ -1,4 +1,4 @@
-package com.ikarosoft.themission;
+package com.ikarosoft.themission.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.ikarosoft.themission.R;
 
 
 public class NewProjectFragment extends Fragment {

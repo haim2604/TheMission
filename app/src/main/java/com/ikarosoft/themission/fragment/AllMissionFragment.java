@@ -1,9 +1,10 @@
-package com.ikarosoft.themission;
+package com.ikarosoft.themission.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,57 +14,78 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.ikarosoft.themission.MissionAdapterViewModel;
+import com.ikarosoft.themission.MyListener;
+import com.ikarosoft.themission.R;
+import com.ikarosoft.themission.Task.TaskModel;
 import com.ikarosoft.themission.adapters.MyAdapter;
-import com.ikarosoft.themission.model.MyTask;
-import com.ikarosoft.themission.model.TaskModel;
+import com.ikarosoft.themission.Task.MyTask;
 
 import java.util.List;
 
 
 public class AllMissionFragment extends Fragment {
     RecyclerView listMission;
-    List<MyTask> data;
+    MissionAdapterViewModel viewModel;
+    MyAdapter adapter = null;
+
+    Button replaceBtn ;
+    Button addMissionBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_mission, container, false);
+        viewModel = new ViewModelProvider(this).get(MissionAdapterViewModel.class);
 
         String idd= AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
+
+       //TODO : arg object
         MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
         Log.d("TAGAr",idd+"  "+task.getNameTask());
 
-        Button replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
-        Button addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
+        replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
+        addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
 
 
         listMission = view.findViewById(R.id.allmission_recyclerView);
         listMission.hasFixedSize();
         listMission.setHasFixedSize(true);
 
-
         // lRecyclerView stage 2
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         listMission.setLayoutManager(layoutManager);
 
-        data = TaskModel.instance.getAllTask();
+      //  MyAdapter adapter = new MyAdapter(this,getLayoutInflater());
 
-        MyAdapter adapter = new MyAdapter(data,getLayoutInflater());
-        //MissAdapter adapter = new MissAdapter();
+
+       MyAdapter adapter = new MyAdapter(viewModel,getLayoutInflater());
         listMission.setAdapter(adapter);
 
-        adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
+//        MyAdapter adapter=null;
+//        TaskModel.instance.getAllTask(new MyListener<List<MyTask>>() {
+//            @Override
+//            public void onComplete(List<MyTask> result) {
+//
+//                // TODO
+//                //lanchList(result);
+//                MyAdapter adapter = new MyAdapter(result,getLayoutInflater());
+//                //MissAdapter adapter = new MissAdapter();
+//                listMission.setAdapter(adapter);
+//            }
+//        });
 
-                Log.d("TAG123","aaaa  "+position);
-            }
-        });
+
+//        adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
+//
+//                Log.d("TAG123","aaaa  "+position);
+//            }
+//        });
 
 
 
@@ -82,11 +104,48 @@ public class AllMissionFragment extends Fragment {
             }
         });
 
+        reloadData();
+        viewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<MyTask>>() {
+            @Override
+            public void onChanged(List<MyTask> myTasks) {
+//                adapter = new MyAdapter(viewModel,getLayoutInflater());
+//                listMission.setAdapter(adapter);
 
+               adapter.notifyDataSetChanged();
+            }
+        });
+        reloadData();
         return view;
     }
 
-//    class MissViewHolder extends RecyclerView.ViewHolder{
+    private void reloadData() {
+        addMissionBtn.setEnabled(false);
+        replaceBtn.setEnabled(false);
+        TaskModel.instance.refreshAllTask(new MyListener<List<MyTask>>() {
+            @Override
+            public void onComplete(List<MyTask> result) {
+               // adapter = new MyAdapter(viewModel,getLayoutInflater());
+               // listMission.setAdapter(adapter);
+                addMissionBtn.setEnabled(true);
+                replaceBtn.setEnabled(true);
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+            if (adapter!=null){
+                adapter.notifyDataSetChanged();
+            }
+
+    }
+
+
+
+    //    class MissViewHolder extends RecyclerView.ViewHolder{
 //
 //
 //        public OnItemClickListener listener;

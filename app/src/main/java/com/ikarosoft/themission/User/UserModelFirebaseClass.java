@@ -1,5 +1,7 @@
-package com.ikarosoft.themission.model;
+package com.ikarosoft.themission.User;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,22 +10,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
+import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 
 public class UserModelFirebaseClass {
     // Access a Cloud Firestore instance from your Activity
     List<User> data;
-    public void getAllUser(UserModelClass.GetAllUserListener listener) {
+    public void getAllUser(UserModel.GetAllUserListener listener) {
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
@@ -50,7 +53,7 @@ public class UserModelFirebaseClass {
 
     }
 
-    public void addUser(User user, UserModelClass.AddUserListener listener) {
+    public void addUser(User user, UserModel.AddUserListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 // Create a new user with a first and last name
 //        Map<String, Object> data = new HashMap<>();
@@ -80,7 +83,7 @@ public class UserModelFirebaseClass {
 
     }
 
-    public void getUserByPhone(String phone, UserModelClass.GetUserListener listener) {
+    public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(phone).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -98,7 +101,7 @@ public class UserModelFirebaseClass {
         });
     }
 
-    public void deleteUser(User user, UserModelClass.DeleteListener listener) {
+    public void deleteUser(User user, UserModel.DeleteListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(user.getPhone())
                 .delete()
@@ -109,6 +112,39 @@ public class UserModelFirebaseClass {
 
                     }
                 });
+
+    }
+
+
+    public  void uploadImage(Bitmap bitmap,String name,final UserModel.UploadImageListener listener){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference imageRef = storage.getReference().child("images").child(name);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte [] data = baos.toByteArray();
+        UploadTask uploadTask = imageRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                listener.onComplate(null);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Uri downloadUrl= uri;
+                        listener.onComplate(downloadUrl.toString());
+                    }
+                });
+
+
+
+            }
+        });
+
+
 
     }
 }

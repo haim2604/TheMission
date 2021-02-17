@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/m1"
-    tools:context=".AllMissionFragment">
+    tools:context=".fragment.AllMissionFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
