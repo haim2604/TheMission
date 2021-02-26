@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MissionAdapterViewModel;
 import com.ikarosoft.themission.MyListener;
@@ -32,6 +33,7 @@ public class AllMissionFragment extends Fragment {
     MissionAdapterViewModel viewModel;
     MyAdapter adapter = null;
     SwipeRefreshLayout sref;
+    String UserID;
 
 
     Button replaceBtn;
@@ -49,6 +51,11 @@ public class AllMissionFragment extends Fragment {
         //TODO : arg object
         MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
         Log.d("TAGAr", idd + "  " + task.getNameTask());
+
+        FirebaseUser result = AllMissionFragmentArgs.fromBundle(getArguments()).getUser();
+        Log.d("TAGLOGIN", idd + "  " + result.getUid()+"  ...."+result.getEmail());
+
+
 
         replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);

@@ -32,14 +32,32 @@ public class UserModel {
     UserModelFirebase userModelFirebase = new UserModelFirebase();
     private FirebaseAuth mAuth;
 
-    private UserModel(){
+    private UserModel() {
 
     }
+    //update
+    //        FirebaseUser userfb = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                .setDisplayName("Jane Q. User")
+//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+//                .build();
+//
+//        userfb.updateProfile(profileUpdates)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            Log.d("TAG", "User profile updated.");
+//                        }
+//                    }
+//                });
 
-    public void addUser(User user,MyListener<FirebaseUser> listener){
+
+    public void addUser(User user, MyListener<FirebaseUser> listener) {
 
         mAuth = FirebaseAuth.getInstance();
-        String username = user.getPhone()+"@mission.com";
+        String username = user.getPhone() + "@mission.com";
 
         mAuth.createUserWithEmailAndPassword(username, user.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -49,10 +67,10 @@ public class UserModel {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser fbuser = mAuth.getCurrentUser();
-                            Log.d("TAGNEW","user add without detail   ...  " );
+                            Log.d("TAGNEW", "user add without detail   ...  ");
 
 
-                            if(fbuser != null){
+                            if (fbuser != null) {
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(user.getName())
                                         .setPhotoUri(Uri.parse(user.getImageUrl()))
@@ -73,7 +91,7 @@ public class UserModel {
                             }
 
 
-                            Log.d("TAGLOGIN","add user");
+                            Log.d("TAGLOGIN", "add user");
 
                             listener.onComplete(fbuser);
                         } else {
@@ -91,12 +109,12 @@ public class UserModel {
 
     }
 
-    public  void uploadImage(Bitmap bitmap,String name,final UserModel.UploadImageListener listener){
+    public void uploadImage(Bitmap bitmap, String name, final UserModel.UploadImageListener listener) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference imageRef = storage.getReference().child("images").child(name);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte [] data = baos.toByteArray();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
         UploadTask uploadTask = imageRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -109,20 +127,52 @@ public class UserModel {
                 imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Uri downloadUrl= uri;
+                        Uri downloadUrl = uri;
                         listener.onComplate(downloadUrl.toString());
                     }
                 });
-
 
 
             }
         });
 
 
+    }
+
+    public void signIn(User user,MyListener<FirebaseUser> listener) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        mAuth.signInWithEmailAndPassword(user.getPhone(),user.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAGLOG", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            listener.onComplete(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAGLOG", "signInWithEmail:failure", task.getException());
+                            listener.onComplete(null);
+
+                        }
+
+                            }
+                });
 
     }
 
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Log.d("TAGLOGIN", "Logout");
+
+    }
+
+    public void getCurrentUser(MyListener<FirebaseUser> listener) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        listener.onComplete(mAuth.getCurrentUser());
+    }
 
 
 //    public void getUserByPhone(String phone, GetUserListener listener) {
@@ -130,48 +180,49 @@ public class UserModel {
 //    }
 
 
-    public interface MListener<T>{
+    public interface MListener<T> {
         void onComplete(T result);
     }
 
-    public interface GetAllUserListener extends MListener<List<User>>{};
+    public interface GetAllUserListener extends MListener<List<User>> {
+    }
+
+    ;
 
 
 //    public interface GetUserListener extends UserModelClasse.GetUserListener {
 //        void onComplete(User user);
 //    }
 
-//TODO l;fsfs;
+    //TODO l;fsfs;
 //public void getAllUser(GetAllUserListener listener){
-    public void getAllUser(MyListener<List<User>> listener){
-         //sqlClass.getAllUser(listener);
-      // modelfirebaseClass.getAllUser(listener);
-       userModelFirebase.getAllUser(listener);
-     }
+    public void getAllUser(MyListener<List<User>> listener) {
+        //sqlClass.getAllUser(listener);
+        // modelfirebaseClass.getAllUser(listener);
+        userModelFirebase.getAllUser(listener);
+    }
 
-     public interface AddUserListener{
+    public interface AddUserListener {
         void onComplete();
-     }
+    }
 
 
+    interface DeleteListener extends AddUserListener {
+    }
 
+    ;
 
-
-
-
-    interface DeleteListener extends AddUserListener{};
-
-    public void deleteUser(User user, DeleteListener listener){
-        modelfirebaseClass.deleteUser(user,listener);
+    public void deleteUser(User user, DeleteListener listener) {
+        modelfirebaseClass.deleteUser(user, listener);
     }
     //all function - delete ,update...and more
 
-    public interface UploadImageListener{
+    public interface UploadImageListener {
         void onComplate(String url);
     }
 
-    public  void uuploadImage(Bitmap bitmap, String name, final UploadImageListener listener){
-        modelfirebaseClass.uploadImage(bitmap,name,listener);
+    public void uuploadImage(Bitmap bitmap, String name, final UploadImageListener listener) {
+        modelfirebaseClass.uploadImage(bitmap, name, listener);
     }
 
-    }
+}

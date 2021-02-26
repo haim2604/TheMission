@@ -45,6 +45,9 @@
         <argument
             android:name="tes"
             app:argType="com.ikarosoft.themission.Task.MyTask" />
+        <argument
+            android:name="user"
+            app:argType="com.google.firebase.auth.FirebaseUser" />
     </fragment>
     <fragment
         android:id="@+id/perframTaskFragment"
