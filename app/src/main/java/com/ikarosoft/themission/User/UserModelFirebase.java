@@ -85,7 +85,7 @@ public class UserModelFirebase {
 
     }
 
-    public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
+ /*   public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(phone).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -101,7 +101,7 @@ public class UserModelFirebase {
 
             }
         });
-    }
+    }*/
 
     public void deleteUser(User user, UserModel.DeleteListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

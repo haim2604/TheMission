@@ -34,8 +34,7 @@ public class AllMissionFragment extends Fragment {
     SwipeRefreshLayout sref;
 
 
-
-    Button replaceBtn ;
+    Button replaceBtn;
     Button addMissionBtn;
 
     @Override
@@ -45,11 +44,11 @@ public class AllMissionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_mission, container, false);
         viewModel = new ViewModelProvider(this).get(MissionAdapterViewModel.class);
 
-        String idd= AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
+        String idd = AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
 
-       //TODO : arg object
+        //TODO : arg object
         MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
-        Log.d("TAGAr",idd+"  "+task.getNameTask());
+        Log.d("TAGAr", idd + "  " + task.getNameTask());
 
         replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);
@@ -72,10 +71,10 @@ public class AllMissionFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         listMission.setLayoutManager(layoutManager);
 
-      //  MyAdapter adapter = new MyAdapter(this,getLayoutInflater());
+        //  MyAdapter adapter = new MyAdapter(this,getLayoutInflater());
 
 
-       MyAdapter adapter = new MyAdapter(viewModel,getLayoutInflater());
+        MyAdapter adapter = new MyAdapter(viewModel, getLayoutInflater());
         listMission.setAdapter(adapter);
 
 //        MyAdapter adapter=null;
@@ -97,11 +96,9 @@ public class AllMissionFragment extends Fragment {
             public void onItemClick(int position) {
                 Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
 
-                Log.d("TAG123","aaaa  "+position);
+                Log.d("TAG123", "aaaa  " + position);
             }
         });
-
-
 
 
         replaceBtn.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +121,7 @@ public class AllMissionFragment extends Fragment {
 //                adapter = new MyAdapter(viewModel,getLayoutInflater());
 //                listMission.setAdapter(adapter);
 
-               adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
         reloadData();
@@ -137,8 +134,8 @@ public class AllMissionFragment extends Fragment {
         TaskModel.instance.refreshAllTask(new ListenerVoid() {
             @Override
             public void onComplete() {
-               // adapter = new MyAdapter(viewModel,getLayoutInflater());
-               // listMission.setAdapter(adapter);
+                // adapter = new MyAdapter(viewModel,getLayoutInflater());
+                // listMission.setAdapter(adapter);
                 addMissionBtn.setEnabled(true);
                 replaceBtn.setEnabled(true);
                 sref.setRefreshing(false);
@@ -152,12 +149,11 @@ public class AllMissionFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-            if (adapter!=null){
-                adapter.notifyDataSetChanged();
-            }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
 
     }
-
 
 
     //    class MissViewHolder extends RecyclerView.ViewHolder{

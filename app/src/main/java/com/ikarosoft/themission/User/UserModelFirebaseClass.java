@@ -82,24 +82,24 @@ public class UserModelFirebaseClass {
                 });
 
     }
-
-    public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(phone).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                User user = null;
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc = task.getResult();
-                    if( doc != null){
-                        user =task.getResult().toObject(User.class);
-                    }
-                }
-                listener.onComplete(user);
-
-            }
-        });
-    }
+//
+//    public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("users").document(phone).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                User user = null;
+//                if(task.isSuccessful()){
+//                    DocumentSnapshot doc = task.getResult();
+//                    if( doc != null){
+//                        user =task.getResult().toObject(User.class);
+//                    }
+//                }
+//                listener.onComplete(user);
+//
+//            }
+//        });
+//    }
 
     public void deleteUser(User user, UserModel.DeleteListener listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

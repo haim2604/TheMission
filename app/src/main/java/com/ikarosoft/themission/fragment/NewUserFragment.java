@@ -24,6 +24,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.User.User;
 import com.ikarosoft.themission.User.UserModel;
@@ -44,12 +46,12 @@ public class NewUserFragment extends Fragment {
     EditText name,phone,passAgain,password;
     ImageButton tackPic;
     private Bitmap imageBitmap;
-
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_new_user, container, false);
+        view = inflater.inflate(R.layout.fragment_new_user, container, false);
         addBtn = view.findViewById(R.id.newuser_btn_adduser);
         tackPic = view.findViewById(R.id.newuser_tackpic_ib);
         avatar = view.findViewById(R.id.newuser_pic_iv);
@@ -57,21 +59,19 @@ public class NewUserFragment extends Fragment {
         phone = view.findViewById(R.id.newuser_phone_et);
         passAgain = view.findViewById(R.id.newuser_confirmpass_et);
         password = view.findViewById(R.id.newuser_pass_et);
-        avatt = view.findViewById(R.id.newuser_t_iv);
-        avatt.setImageResource(R.drawable.b5);
-        UserModel.instance.getUserByPhone("256666", new UserModel.GetUserListener() {
-            @Override
-            public void onComplete(User user) {
-
-                Log.d("TAGURL","aaa 2 ffffffffff" +   user.getImageUrl());
-
-
-                if(user.getImageUrl()!= null){
-                    Picasso.get().load(user.getImageUrl()).placeholder(R.drawable.b5).into(avatt);
-
-                }
-            }
-        });
+//        UserModel.instance.getUserByPhone("256666", new UserModel.GetUserListener() {
+//            @Override
+//            public void onComplete(User user) {
+//
+//                Log.d("TAGURL","aaa 2 ffffffffff" +   user.getImageUrl());
+//
+//
+//                if(user.getImageUrl()!= null){
+//                    Picasso.get().load(user.getImageUrl()).placeholder(R.drawable.b5).into(avatt);
+//
+//                }
+//            }
+//        });
 
 
         //tackPic.bringToFront();
@@ -95,10 +95,11 @@ public class NewUserFragment extends Fragment {
         return  view;
     }
 
-    private void saveUser(View view) {
+    private void saveUser(View vieww) {
         User user = new User();
         user.setName(name.getText().toString());
         user.setPhone(phone.getText().toString());
+       //TODO limit password at least 6 characters
         String pass= password.getText().toString();
         if (pass.equals(passAgain.getText().toString())){
             user.setPassword(pass);
@@ -109,22 +110,24 @@ public class NewUserFragment extends Fragment {
         BitmapDrawable drawable = (BitmapDrawable) avatar.getDrawable();
 
         Bitmap image = drawable.getBitmap();
+
+
         UserModel.instance.uploadImage(image, user.getPhone(), new UserModel.UploadImageListener() {
             @Override
             public void onComplate(String url) {
                 if(url.equals(null)){
-                    Log.d("TAGURL","aaa 2 ffffffffff");
+                    Log.d("TAGNEW","url erorr to save");
 
                 }else {
                     user.setImageUrl(url);
 
-                    Log.d("TAGURL","aaa 2" + url);
-                    UserModel.instance.addUser(user, new UserModel.AddUserListener() {
+                    Log.d("TAGNEW","url ok   ...  " + url);
+                    UserModel.instance.addUser(user, new MyListener<FirebaseUser>() {
                         @Override
-                        public void onComplete() {
-                            Log.d("TAGURL","user addd" + url);
-                            Navigation.findNavController(view).popBackStack();
+                        public void onComplete(FirebaseUser result) {
 
+                            //TODO back data ,and login and send result
+                            Navigation.findNavController(view).popBackStack();
                         }
                     });
                 }
@@ -208,17 +211,20 @@ public class NewUserFragment extends Fragment {
             }
         }else  if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
-            }
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            }else {
 
-        builder.setTitle("tack a picture is failed");
-        builder.setMessage("please try later.......");
-        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            builder.setTitle("tack a picture is failed");
+            builder.setMessage("please try later.......");
+            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.show();
+        }
     }
 }

@@ -31,21 +31,22 @@ import java.util.List;
 public class TaskModelFirebase {
     // Access a Cloud Firestore instance from your Activity
     List<MyTask> data;
+
     public void getAllTask(long lastUpdated, MyListener<List<MyTask>> listener) {
         //TODO fix filter
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Timestamp ts = new Timestamp(lastUpdated,0);
+        Timestamp ts = new Timestamp(lastUpdated, 0);
 
         db.collection("task")
-                .whereGreaterThanOrEqualTo("lastUpdated",ts)
-               //filter if we want .whereEqualTo("capital", true)
+                .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                //filter if we want .whereEqualTo("capital", true)
                 .get()
-                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot doc: task.getResult()) {
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
                                 MyTask tt = new MyTask();
                                 tt.fromMap(doc.getData());
 //                                MyTask tt = doc.toObject(MyTask.class);
@@ -61,12 +62,11 @@ public class TaskModelFirebase {
                 });
 
 
-
     }
 
     public void addTask(MyTask myTask, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-          db.collection("task")
+        db.collection("task")
                 .document()
 //                .document(myTask.numberTask)
 
@@ -98,21 +98,21 @@ public class TaskModelFirebase {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("task").document(phone).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                MyTask myTask = null;
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc = task.getResult();
-                    if( doc != null){
-                        myTask = new MyTask();
-                        myTask.fromMap(task.getResult().getData());
-                      //  task.getResult().toObject(MyTask.class);
-                    }
-                }
-                listener.onComplete(myTask);
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        MyTask myTask = null;
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot doc = task.getResult();
+                            if (doc != null) {
+                                myTask = new MyTask();
+                                myTask.fromMap(task.getResult().getData());
+                                //  task.getResult().toObject(MyTask.class);
+                            }
+                        }
+                        listener.onComplete(myTask);
 
-            }
-        });
+                    }
+                });
     }
 
     public void deleteUser(MyTask myTask, ListenerVoid listener) {
@@ -130,12 +130,12 @@ public class TaskModelFirebase {
     }
 
 
-    public  void uploadImage(Bitmap bitmap,String name,final MyListener<String> listener){
+    public void uploadImage(Bitmap bitmap, String name, final MyListener<String> listener) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference imageRef = storage.getReference().child("images_task").child(name);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte [] data = baos.toByteArray();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
         UploadTask uploadTask = imageRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -148,16 +148,14 @@ public class TaskModelFirebase {
                 imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Uri downloadUrl= uri;
+                        Uri downloadUrl = uri;
                         listener.onComplete(downloadUrl.toString());
                     }
                 });
 
 
-
             }
         });
-
 
 
     }
