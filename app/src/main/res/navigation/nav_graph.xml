@@ -15,8 +15,8 @@
             android:id="@+id/action_login_to_newUser"
             app:destination="@id/newUserFragment" />
         <action
-            android:id="@+id/action_login_to_allMission"
-            app:destination="@id/allMissionFragment" />
+            android:id="@+id/action_logint_to_allProj"
+            app:destination="@id/allProjectsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newUserFragment"
@@ -34,9 +34,6 @@
         <action
             android:id="@+id/action_allMission_to_newMission"
             app:destination="@id/newMissionFragment" />
-        <action
-            android:id="@+id/action_allMission_to_allProjects"
-            app:destination="@id/allProjectsFragment" />
         <argument android:name="userd"
             app:argType="string" />
         <argument
@@ -67,6 +64,12 @@
         <action
             android:id="@+id/action_allProjects_to_newProject"
             app:destination="@id/newProjectFragment" />
+        <action
+            android:id="@+id/action_allProj_to_allMission"
+            app:destination="@id/allMissionFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.google.firebase.auth.FirebaseUser" />
     </fragment>
     <fragment
         android:id="@+id/newProjectFragment"

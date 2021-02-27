@@ -7,18 +7,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ikarosoft.themission.ProjectAdapterViewModel;
 import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.model.MyProject;
+import com.ikarosoft.themission.Project.MyProject;
 
 import java.util.List;
 
 public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
-    List<MyProject> data;
+
+
+//    List<MyProject> data;
+    ProjectAdapterViewModel viewModel;
+
     LayoutInflater layoutInflater;
 
 
-    public ProjectAdapter(List<MyProject> data, LayoutInflater layoutInflater){
-        this.data = data;
+    public ProjectAdapter(ProjectAdapterViewModel viewModel, LayoutInflater layoutInflater){
+        this.viewModel = viewModel;
         this.layoutInflater = layoutInflater;
     }
 
@@ -37,19 +42,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
     @Override
     public PojectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        //LayoutInflater inflater = LayoutInflater.from(context);
-
           View view = layoutInflater.inflate(R.layout.porjectlist_row,null);
-        //   View view = inflater.inflate(R.layout.missiionlist_row,null);
-        //   View view = getLayoutInflater()getAc.inflate(R.layout.missiionlist_row,null);
-        PojectViewHolder holder = new PojectViewHolder(view,listener);//1
-
+          PojectViewHolder holder = new PojectViewHolder(view,listener);//1
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull PojectViewHolder holder, int position) {
-        MyProject project = data.get(position);
+        MyProject project = viewModel.getData().getValue().get(position);
 
         holder.bindData(project,position);
     }
@@ -58,6 +58,9 @@ public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if (viewModel.getData().getValue()==null){
+            return 0;
+        }
+        return viewModel.getData().getValue().size();
     }
 }

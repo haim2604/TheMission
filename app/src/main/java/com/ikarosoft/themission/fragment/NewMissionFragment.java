@@ -35,7 +35,7 @@ public class NewMissionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_mission, container, false);
         viewModel = new ViewModelProvider(this).get(NewMissionViewModel.class);
-        taskName= view.findViewById(R.id.newmission_name_et);
+        taskName= view.findViewById(R.id.newproj_et_name);
         addB = view.findViewById(R.id.newmission_btn_addmiss);
 
         addB.setOnClickListener(new View.OnClickListener() {

@@ -11,7 +11,7 @@
 
 
     <EditText
-        android:id="@+id/newmission_name_et"
+        android:id="@+id/newproj_et_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,7 +27,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/newmission_name_et2"
+        android:id="@+id/newproj_et_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -51,7 +51,7 @@
         android:text="project name"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/newmission_name_et"
+        app:layout_constraintEnd_toStartOf="@+id/newproj_et_name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/editTextNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newmission_name_et2" />
+        app:layout_constraintTop_toBottomOf="@+id/newproj_et_description" />
 
     <TextView
         android:id="@+id/textView12"
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:text="@string/user1"
+        android:text="user 4"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -155,19 +155,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/newproj_spinner_user4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -179,7 +167,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/newproj_spinner_user3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -190,7 +178,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView13" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/newproj_spinner_user2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -199,5 +187,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/newproj_et_user1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

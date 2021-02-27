@@ -81,7 +81,8 @@ public class AllMissionFragment extends Fragment {
         //  MyAdapter adapter = new MyAdapter(this,getLayoutInflater());
 
 
-        MyAdapter adapter = new MyAdapter(viewModel, getLayoutInflater());
+       // MyAdapter adapter = new MyAdapter(viewModel, getLayoutInflater());
+        adapter = new MyAdapter(viewModel, getLayoutInflater());
         listMission.setAdapter(adapter);
 
 //        MyAdapter adapter=null;
@@ -111,7 +112,8 @@ public class AllMissionFragment extends Fragment {
         replaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_allMission_to_allProjects);
+                Navigation.findNavController(view).popBackStack();
+//                Navigation.findNavController(view).navigate(R.id.action_allMission_to_allProjects);
             }
         });
 

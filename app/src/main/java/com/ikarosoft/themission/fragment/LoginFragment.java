@@ -112,10 +112,15 @@ public class LoginFragment extends Fragment {
 
     private void reload(FirebaseUser currentUser) {
         Log.d("TAGLOGIN", "Conecet reload   " + currentUser.getUid());
+        for (int i = 0; i < 3; i++) {
+            Log.d("TAGLOGIN", "Conecet reload   " + i);
+        }
+
 
 //TODO delete idd ,mytask ...then i send to next fragment
         String idd = "12346";
-        LoginFragmentDirections.ActionLoginToAllMission action = LoginFragmentDirections.actionLoginToAllMission(idd, "idd", new MyTask("bb", "cc", "566", "456"), currentUser);
+        LoginFragmentDirections.ActionLogintToAllProj action =LoginFragmentDirections.actionLogintToAllProj(currentUser);
+
         //action pas in navigate
         Navigation.findNavController(view).navigate(action);
     }

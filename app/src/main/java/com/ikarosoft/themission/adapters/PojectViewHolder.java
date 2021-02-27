@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.model.MyProject;
+import com.ikarosoft.themission.Project.MyProject;
 
 
 public class PojectViewHolder extends RecyclerView.ViewHolder   {
@@ -45,7 +45,7 @@ public class PojectViewHolder extends RecyclerView.ViewHolder   {
         // tv.setText("a"+Project.getNameProject());
         //  numberProject.setText(" assss ");
         Log.d("TAG4",Project.getName());
-          numberProject.setText(Project.getNumber());
+          numberProject.setText(Project.getNumProj());
           nameProject.setText(Project.getName());
           statusProject.setText(Project.getStatus());
     }
