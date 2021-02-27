@@ -25,7 +25,7 @@ public class NewMissionFragment extends Fragment {
     NewMissionViewModel viewModel;
     EditText taskName;
     Button addB;
-
+    View view;
    // String numProject,phoneUser,nameTask,numberTask;
 
 
@@ -33,7 +33,7 @@ public class NewMissionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_new_mission, container, false);
+        view = inflater.inflate(R.layout.fragment_new_mission, container, false);
         viewModel = new ViewModelProvider(this).get(NewMissionViewModel.class);
         taskName= view.findViewById(R.id.newproj_et_name);
         addB = view.findViewById(R.id.newmission_btn_addmiss);

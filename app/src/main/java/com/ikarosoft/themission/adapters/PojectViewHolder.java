@@ -44,7 +44,7 @@ public class PojectViewHolder extends RecyclerView.ViewHolder   {
         this.position = position;
         // tv.setText("a"+Project.getNameProject());
         //  numberProject.setText(" assss ");
-        Log.d("TAG4",Project.getName());
+    ///    Log.d("TAG4",Project.getName());
           numberProject.setText(Project.getNumProj());
           nameProject.setText(Project.getName());
           statusProject.setText(Project.getStatus());
