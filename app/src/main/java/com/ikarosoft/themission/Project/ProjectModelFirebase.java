@@ -23,6 +23,7 @@ import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.Task.MyTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ProjectModelFirebase {
     // Access a Cloud Firestore instance from your Activity
     List<MyProject> data;
 
-    public void getAllProject(long lastUpdated, MyListener<List<MyProject>> listener) {
+    public void getAllProject(String myPhone,long lastUpdated, MyListener<List<MyProject>> listener) {
         //TODO fix filter
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -39,6 +40,10 @@ public class ProjectModelFirebase {
 
         db.collection("project")
                 .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                //.whereEqualTo("usersPhone1",myPhone)
+              //  .whereArrayContainsAny(Arrays.asList("usersPhone1","usersPhone2","usersPhone3","usersPhone4"),myPhone)
+
+               // .whereArrayContains("",myPhone)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

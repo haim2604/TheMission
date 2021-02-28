@@ -20,6 +20,8 @@ public class ProjectAdapterViewModel extends ViewModel {
         data = ProjectModel.instance.getAllProject();
     }
 
+
+
     public LiveData<List<MyProject>> getData() {
         return data;
     }

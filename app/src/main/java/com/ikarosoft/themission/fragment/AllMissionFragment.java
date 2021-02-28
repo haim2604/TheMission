@@ -46,14 +46,14 @@ public class AllMissionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_mission, container, false);
         viewModel = new ViewModelProvider(this).get(MissionAdapterViewModel.class);
 
-        String idd = AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
-
-        //TODO : arg object
-        MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
-        Log.d("TAGAr", idd + "  " + task.getNameTask());
-
-        FirebaseUser result = AllMissionFragmentArgs.fromBundle(getArguments()).getUser();
-        Log.d("TAGLOGIN", idd + "  " + result.getUid()+"  ...."+result.getEmail());
+//      //  String idd = AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
+//
+//        //TODO : arg object
+//      //  MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
+//        Log.d("TAGAr", idd + "  " + task.getNameTask());
+//
+//        FirebaseUser result = AllMissionFragmentArgs.fromBundle(getArguments()).getUser();
+//        Log.d("TAGLOGIN", idd + "  " + result.getUid()+"  ...."+result.getEmail());
 
 
 

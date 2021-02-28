@@ -46,14 +46,12 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="ALL PROJECET"
+        android:text=" MY PROJECET"
         android:textColor="@color/m_blue"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"

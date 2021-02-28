@@ -1,5 +1,6 @@
 package com.ikarosoft.themission.fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.Task.MyTask;
@@ -111,10 +113,14 @@ public class LoginFragment extends Fragment {
 
 
     private void reload(FirebaseUser currentUser) {
-        Log.d("TAGLOGIN", "Conecet reload   " + currentUser.getUid());
-        for (int i = 0; i < 3; i++) {
-            Log.d("TAGLOGIN", "Conecet reload   " + i);
-        }
+        String []myphone = currentUser.getEmail().split("@");
+
+
+
+        Log.d("TAGLOGIN", "Conecet reload   " + myphone [0]);
+        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        sp.edit().putString("myPhone", myphone [0]).commit();
+
 
 
 //TODO delete idd ,mytask ...then i send to next fragment

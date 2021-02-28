@@ -1,5 +1,7 @@
 package com.ikarosoft.themission.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ikarosoft.themission.ListenerVoid;
+import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.Project.MyProject;
 import com.ikarosoft.themission.Project.ProjectModel;
 import com.ikarosoft.themission.R;
@@ -30,8 +33,8 @@ public class NewProjectFragment extends Fragment {
     String[] usersItem;
     View view;
     EditText nameProj,description;
-    TextView myphone;
-    String myPhoneString="0545444444";
+    TextView tvmyphone;
+    String myPhone;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class NewProjectFragment extends Fragment {
 
         nameProj = view.findViewById(R.id.newproj_et_name);
         description = view.findViewById(R.id.newproj_et_description);
-        myphone = view.findViewById(R.id.newproj_et_user1);
+        tvmyphone = view.findViewById(R.id.newproj_et_user1);
 
         sp2 = view.findViewById(R.id.newproj_spinner_user2);
         sp3 = view.findViewById(R.id.newproj_spinner_user3);
@@ -48,7 +51,10 @@ public class NewProjectFragment extends Fragment {
 
         addBtn=view.findViewById(R.id.newproj_btn_add);
 
-        myphone.setText(myPhoneString);
+
+        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        myPhone = sp.getString("myPhone", "0222222222");
+        tvmyphone.setText(myPhone);
 
         usersItem = new String[]{"0523888888", "0546998772", "055975652", "0502111118", "0523344997", "0528001910"};
 
@@ -121,7 +127,7 @@ public class NewProjectFragment extends Fragment {
         project.setName(nameProj.getText().toString());
         project.setDescription(description.getText().toString());
         project.setStatus("start");
-        project.setUsersPhone(myPhoneString+"#"+sp2.getSelectedItem().toString()+"#"+sp3.getSelectedItem().toString()+"#"+sp4.getSelectedItem().toString());
+        project.setUsersPhone(myPhone+"#"+sp2.getSelectedItem().toString()+"#"+sp3.getSelectedItem().toString()+"#"+sp4.getSelectedItem().toString());
 
         int min=1000;
         int max=9999;

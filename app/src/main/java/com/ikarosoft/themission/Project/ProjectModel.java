@@ -3,6 +3,7 @@ package com.ikarosoft.themission.Project;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -25,11 +26,15 @@ public class ProjectModel {
     }
 
    LiveData<List<MyProject>> taskList;
+    SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+    String myPhone = sp.getString("myPhone", "0222222222");
 
     public LiveData<List<MyProject>> getAllProject() {
-        if (taskList == null) {
-            taskList = modelSql.getAllProj();
+        Log.d("TAGf"," getAllProject  ");
 
+        if (taskList == null) {
+            taskList = modelSql.getAllProj(myPhone);
+            Log.d("TAGf"," getAllProject sql ");
 
             refreshAllProject(null);
         }
@@ -38,13 +43,16 @@ public class ProjectModel {
     }
 
     public void refreshAllProject(final ListenerVoid listener) {
+
+        Log.d("TAGf"," refreshAllProjec ");
+
         //1.get local last updeat data
 
         SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        long lastUpdated = sp.getLong("lastUpdatedProj", 0);
+        long lastUpdated = sp.getLong("lastUpdatedProj"+myPhone, 0);
 
         //2.get all update record from firebase form the last update data
-        modelFirebase.getAllProject(lastUpdated, new MyListener<List<MyProject>>() {
+        modelFirebase.getAllProject(myPhone,lastUpdated, new MyListener<List<MyProject>>() {
             @Override
             public void onComplete(List<MyProject> result) {
 
@@ -52,13 +60,16 @@ public class ProjectModel {
 
                 //3.insret the new updete to local db
                 for (MyProject p : result) {
+
+                    Log.d("TAGf"," back from firebase ");
+
                     modelSql.addProject(p, null);
                     if (p.getLastUpdated() > lastU) {
                         lastU = p.getLastUpdated();
                     }
                 }
                 //4.update the local last update date
-                sp.edit().putLong("lastUpdatedProj", lastU).commit();
+                sp.edit().putLong("lastUpdatedProj"+myPhone, lastU).commit();
 
                 //5.return the update data to the listeners
                 if (listener != null) {
@@ -77,6 +88,8 @@ public class ProjectModel {
     }
 
     public void addProject(MyProject myProject, ListenerVoid listener) {
+        String [] users = myProject.getUsersPhone().split("#");
+
         modelFirebase.addProject(myProject, new ListenerVoid() {
             @Override
             public void onComplete() {

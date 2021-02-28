@@ -1,5 +1,7 @@
 package com.ikarosoft.themission.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,12 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MissionAdapterViewModel;
+import com.ikarosoft.themission.MyApplication;
+import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.Project.ProjectModel;
 import com.ikarosoft.themission.ProjectAdapterViewModel;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.Task.MyTask;
+import com.ikarosoft.themission.User.UserModel;
 import com.ikarosoft.themission.adapters.ProjectAdapter;
 import com.ikarosoft.themission.Project.MyProject;
 import com.ikarosoft.themission.Project.ProjectModelteee;
@@ -35,13 +41,14 @@ public class AllProjectsFragment extends Fragment {
     Button addPorjBtn;
     ProjectAdapterViewModel viewModel;
     SwipeRefreshLayout sref;
-
+    String myPhone="0545444444";
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_all_projects, container, false);
+        view = inflater.inflate(R.layout.fragment_all_projects, container, false);
         viewModel = new ViewModelProvider(this).get(ProjectAdapterViewModel.class);
 
         sref = view.findViewById(R.id.allproj_swipe);
@@ -72,9 +79,12 @@ public class AllProjectsFragment extends Fragment {
         adapter.setOnClickListener(new ProjectAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-               // Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
 
-                Log.d("TAG123","aaaa allll prog selecte "+position);
+                SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+                sp.edit().putString("mySelectProject"+myPhone, viewModel.getData().getValue().get(position).getNumProj()).commit();
+               Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
+
+                Log.d("TAG123","aaaa allll prog selecte "+position+"......"+viewModel.getData().getValue().get(position).getNumProj());
             }
         });
 
@@ -111,7 +121,20 @@ public class AllProjectsFragment extends Fragment {
         });
 
     }
-//
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        String selectProject = sp.getString("mySelectProject"+myPhone, "nn");
+        if (!selectProject.equals("nn")){
+            Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
+
+        }
+    }
+
+
+
 //    public void onResume() {
 //        super.onResume();
 //        if (adapter != null) {
