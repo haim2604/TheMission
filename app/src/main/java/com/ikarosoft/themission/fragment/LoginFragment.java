@@ -38,6 +38,9 @@ public class LoginFragment extends Fragment {
     List<User> userList;
     EditText phone, pass;
     View view;
+    SharedPreferences sp ;
+    String myPhone;
+    Button newUserBtn,connectBtn;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -49,10 +52,13 @@ public class LoginFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_login, container, false);
-        Button connectBtn = view.findViewById(R.id.login_btn_connect);
-        Button newUserBtn = view.findViewById(R.id.login_btn_new);
+        connectBtn = view.findViewById(R.id.login_btn_connect);
+        newUserBtn = view.findViewById(R.id.login_btn_new);
         phone = view.findViewById(R.id.login_username_et);
         pass = view.findViewById(R.id.login_pas_et);
+
+
+        sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
 
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +92,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onComplete(FirebaseUser result) {
                 if (result != null) {
-                    reload(result);
+                    reload();
                 }
             }
         });
@@ -97,37 +103,19 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        Log.d("TAGLOGIN", "on start");
-        UserModel.instance.getCurrentUser(new MyListener<FirebaseUser>() {
-            @Override
-            public void onComplete(FirebaseUser currentUser) {
-                if (currentUser != null) {
-                    reload(currentUser);
-                }
-            }
-        });
+
+        myPhone = sp.getString("myPhone", "nn");
+        if (!myPhone.equals("nn")){
+            reload();
+        }
 
     }
 
 
+    private void reload() {
 
-    private void reload(FirebaseUser currentUser) {
-        String []myphone = currentUser.getEmail().split("@");
+       // sp.edit().putString("myPhone", myphone [0]).commit();
 
-
-
-        Log.d("TAGLOGIN", "Conecet reload   " + myphone [0]);
-        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        sp.edit().putString("myPhone", myphone [0]).commit();
-
-
-
-//TODO delete idd ,mytask ...then i send to next fragment
-        String idd = "12346";
-        LoginFragmentDirections.ActionLogintToAllProj action =LoginFragmentDirections.actionLogintToAllProj(currentUser);
-
-        //action pas in navigate
-        Navigation.findNavController(view).navigate(action);
+        Navigation.findNavController(view).navigate(R.id.action_logint_to_allProj);
     }
 }

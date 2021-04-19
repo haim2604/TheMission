@@ -1,8 +1,10 @@
 package com.ikarosoft.themission.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.ikarosoft.themission.ListenerVoid;
+import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.User.User;
@@ -88,24 +92,52 @@ public class NewUserFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                saveUser(view);
+                saveUser();
             }
         });
 
         return  view;
     }
 
-    private void saveUser(View vieww) {
+    private boolean saveUser() {
+        String tName="q",tPhone="q" ,tPass="q",tPassAg="q";
         User user = new User();
-        user.setName(name.getText().toString());
-        user.setPhone(phone.getText().toString());
-       //TODO limit password at least 6 characters
-        String pass= password.getText().toString();
-        if (pass.equals(passAgain.getText().toString())){
-            user.setPassword(pass);
-        }else{
-            passAgain.setError("the password is not equal");
+        try{
+            tName = name.getText().toString();
+            tPhone = phone.getText().toString();
+            tPass = password.getText().toString();
+            tPassAg = passAgain.getText().toString();
+
+        }catch (Exception e){
+            return false;
         }
+        if(tName.equals("q")){
+            name.setError("Please add a name");
+            return false;
+        }
+
+        if(tPhone.equals("q")){
+            phone.setError("Please add a phone");
+            return false;
+        }
+        if(tPass.equals("q")){
+            password.setError("Please add a password");
+            return false;
+        }
+
+        if (!tPass.equals(tPassAg)){
+            passAgain.setError("the password is not equal");
+            return false;
+        }
+         if(tPass.length()<7){
+             password.setError("the password is shorter");
+         }
+
+        user.setPassword(tPass);
+        user.setName(tName);
+        user.setPhone(tPhone);
+
+
 
         BitmapDrawable drawable = (BitmapDrawable) avatar.getDrawable();
 
@@ -120,19 +152,21 @@ public class NewUserFragment extends Fragment {
 
                 }else {
                     user.setImageUrl(url);
-
-                    Log.d("TAGNEW","url ok   ...  " + url);
-                    UserModel.instance.addUser(user, new MyListener<FirebaseUser>() {
-                        @Override
-                        public void onComplete(FirebaseUser result) {
-
-                            //TODO back data ,and login and send result
-                            Navigation.findNavController(view).popBackStack();
-                        }
+                    UserModel.instance.addUser(user, new ListenerVoid() {
+                                @Override
+                                public void onComplete() {
+                                    SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+                                    sp.edit().putString("myPhone", user.getPhone()).commit();
+                                    sp.edit().putString("myName", user.getName()).commit();
+                                    Navigation.findNavController(view).popBackStack();
+                                }
                     });
+
+
                 }
             }
         });
+        return true;
     }
 
 

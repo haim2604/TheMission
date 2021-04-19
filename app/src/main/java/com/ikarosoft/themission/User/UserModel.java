@@ -18,6 +18,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
 
@@ -26,35 +27,22 @@ import java.util.List;
 
 public class UserModel {
     public final static UserModel instance = new UserModel();
-    UserModelSqlClass sqlClass = new UserModelSqlClass();
-    UserModelFirebaseClass modelfirebaseClass = new UserModelFirebaseClass();
+    ModelSqlClass sqlClass = new ModelSqlClass();
 
-    UserModelFirebase userModelFirebase = new UserModelFirebase();
+    UserModelFirebase modelFirebase = new UserModelFirebase();
     private FirebaseAuth mAuth;
 
     private UserModel() {
 
     }
-    //update
-    //        FirebaseUser userfb = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                .setDisplayName("Jane Q. User")
-//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-//                .build();
-//
-//        userfb.updateProfile(profileUpdates)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            Log.d("TAG", "User profile updated.");
-//                        }
-//                    }
-//                });
+    public void addUser(User user, ListenerVoid listener) {
+
+        modelFirebase.addUser(user,listener);
+
+    }
 
 
-    public void addUser(User user, MyListener<FirebaseUser> listener) {
+    public void addUserOLD(User user, MyListener<FirebaseUser> listener) {
 
         mAuth = FirebaseAuth.getInstance();
         String username = user.getPhone() + "@mission.com";
@@ -199,7 +187,7 @@ public class UserModel {
     public void getAllUser(MyListener<List<User>> listener) {
         //sqlClass.getAllUser(listener);
         // modelfirebaseClass.getAllUser(listener);
-        userModelFirebase.getAllUser(listener);
+       modelFirebase.getAllUser(listener);
     }
 
     public interface AddUserListener {
@@ -213,7 +201,7 @@ public class UserModel {
     ;
 
     public void deleteUser(User user, DeleteListener listener) {
-        modelfirebaseClass.deleteUser(user, listener);
+      //  modelfirebaseClass.deleteUser(user, listener);
     }
     //all function - delete ,update...and more
 
@@ -222,7 +210,7 @@ public class UserModel {
     }
 
     public void uuploadImage(Bitmap bitmap, String name, final UploadImageListener listener) {
-        modelfirebaseClass.uploadImage(bitmap, name, listener);
+       // modelfirebaseClass.uploadImage(bitmap, name, listener);
     }
 
 }

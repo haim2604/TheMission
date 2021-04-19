@@ -17,6 +17,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyListener;
 
 import java.io.ByteArrayOutputStream;
@@ -55,22 +56,15 @@ public class UserModelFirebase {
 
     }
 
-    public void addUser(User user, UserModel.AddUserListener listener) {
+    public void addUser(User user, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-// Create a new user with a first and last name
-//        Map<String, Object> data = new HashMap<>();
-//        data.put("first", "Ada");
-//        data.put("last", "Lovelace");
-//        data.put("born", 1815);
-
-// Add a new document with a generated ID
-        db.collection("users")
-                .document(user.getPhone())
-                .set(user)
+        db.collection("project")
+                .document()
+                .set(user.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "user add to firebase......");
+                        Log.d("TAG", "task add to firebase......");
                         listener.onComplete();
                     }
                 })
@@ -82,6 +76,10 @@ public class UserModelFirebase {
 
                     }
                 });
+
+
+
+
 
     }
 
