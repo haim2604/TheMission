@@ -40,7 +40,7 @@
         android:layout_marginEnd="50dp"
         android:background="@drawable/w1"
         android:ems="10"
-        android:hint="Name"
+        android:hint="phone"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/login_pas_et"
         app:layout_constraintDimensionRatio="7:1"
