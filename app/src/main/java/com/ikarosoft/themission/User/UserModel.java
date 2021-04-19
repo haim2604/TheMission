@@ -127,28 +127,8 @@ public class UserModel {
 
     }
 
-    public void signIn(User user,MyListener<FirebaseUser> listener) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        mAuth.signInWithEmailAndPassword(user.getPhone(),user.getPassword())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAGLOG", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            listener.onComplete(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAGLOG", "signInWithEmail:failure", task.getException());
-                            listener.onComplete(null);
-
-                        }
-
-                            }
-                });
-
+    public void signIn(User user,MyListener<Boolean> listener) {
+        modelFirebase.signIn(user, listener);
     }
 
     public void logout() {

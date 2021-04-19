@@ -1,5 +1,7 @@
 package com.ikarosoft.themission.User;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
@@ -18,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.ikarosoft.themission.ListenerVoid;
+import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
 
 import java.io.ByteArrayOutputStream;
@@ -143,6 +146,41 @@ public class UserModelFirebase {
 
             }
         });
+
+
+
+    }
+
+    public void signIn(User user, MyListener<Boolean> listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .whereEqualTo("password", user.getPassword())
+                .whereEqualTo("phone", user.getPhone())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()&&(!(task.getResult().isEmpty()))) {
+
+                            for (QueryDocumentSnapshot doc: task.getResult()) {
+                                User us =new User();
+                                us.fromMap(doc.getData());
+                                SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+                                sp.edit().putString("myPhone", us.getPhone()).commit();
+                                sp.edit().putString("myName", us.getName()).commit();
+
+                            }
+                            listener.onComplete(true);
+
+//
+                        } else {
+                            listener.onComplete(false);
+
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                        listener.onComplete(false);
+                    }
+                });
 
 
 

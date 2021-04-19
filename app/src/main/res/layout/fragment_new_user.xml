@@ -10,7 +10,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <Button
-        android:id="@+id/newuser_btn_adduser"
+        android:id="@+id/setting_btn_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

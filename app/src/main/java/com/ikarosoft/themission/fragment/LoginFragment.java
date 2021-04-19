@@ -1,5 +1,6 @@
 package com.ikarosoft.themission.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class LoginFragment extends Fragment {
     SharedPreferences sp ;
     String myPhone;
     Button newUserBtn,connectBtn;
+    ProgressDialog progressDialog;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -71,14 +74,24 @@ public class LoginFragment extends Fragment {
     }
 
     private void connect() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("connect...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         User tempUser = new User();
         tempUser.setPhone(phone.getText().toString());
         tempUser.setPassword(pass.getText().toString());
-        UserModel.instance.signIn(tempUser, new MyListener<FirebaseUser>() {
+        UserModel.instance.signIn(tempUser, new MyListener<Boolean>() {
             @Override
-            public void onComplete(FirebaseUser result) {
-                if (result != null) {
+            public void onComplete(Boolean result) {
+                if (result) {
                     reload();
+                }else {
+                  phone.getText().clear();
+                  pass.getText().clear();
+                  phone.setError("phone or password is incorrect");
+                  progressDialog.dismiss();
+
                 }
             }
         });
@@ -89,11 +102,16 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        sp.edit().putString("myPhone", "nn").commit();
-
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("start...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         myPhone = sp.getString("myPhone", "nn");
         if (!myPhone.equals("nn")){
+            progressDialog.setMessage("connect...");
             reload();
+        }else {
+            progressDialog.dismiss();
         }
 
     }
@@ -104,5 +122,7 @@ public class LoginFragment extends Fragment {
        // sp.edit().putString("myPhone", myphone [0]).commit();
 
         Navigation.findNavController(view).navigate(R.id.action_logint_to_allProj);
+        progressDialog.dismiss();
+
     }
 }

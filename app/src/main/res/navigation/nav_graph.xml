@@ -71,4 +71,14 @@
             app:popUpTo="@id/allMissionFragment"
             app:popUpToInclusive="false" />
     </fragment>
+    <fragment
+        android:id="@+id/setting2"
+        android:name="com.ikarosoft.themission.Setting"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_setting_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_setting" app:destination="@id/setting2" />
 </navigation>

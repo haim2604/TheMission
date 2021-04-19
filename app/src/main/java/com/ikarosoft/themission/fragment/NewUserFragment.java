@@ -27,14 +27,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyApplication;
-import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.User.User;
 import com.ikarosoft.themission.User.UserModel;
-import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -59,7 +56,7 @@ public class NewUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_user, container, false);
-        addBtn = view.findViewById(R.id.newuser_btn_adduser);
+        addBtn = view.findViewById(R.id.setting_btn_back);
         tackPic = view.findViewById(R.id.newuser_tackpic_ib);
         avatar = view.findViewById(R.id.newuser_pic_iv);
         name= view.findViewById(R.id.newuser_name_et);

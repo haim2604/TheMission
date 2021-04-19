@@ -38,11 +38,12 @@ import java.util.List;
 public class AllProjectsFragment extends Fragment {
     RecyclerView listProj;
     List<MyProject> data;
-    Button addPorjBtn;
+    Button addPorjBtn,setting;
     ProjectAdapterViewModel viewModel;
     SwipeRefreshLayout sref;
     String myPhone="0545444444";
     View view;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +55,14 @@ public class AllProjectsFragment extends Fragment {
         sref = view.findViewById(R.id.allproj_swipe);
         addPorjBtn = view.findViewById(R.id.allproj_btn_newproj);
         listProj = view.findViewById(R.id.allproj_recyclerView);
+        setting = view.findViewById(R.id.allproj_btn_setting);
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_global_setting);
+            }
+        });
         listProj.setHasFixedSize(true);
 
         sref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
