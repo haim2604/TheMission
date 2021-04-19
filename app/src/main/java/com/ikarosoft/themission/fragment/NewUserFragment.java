@@ -1,6 +1,7 @@
 package com.ikarosoft.themission.fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,6 +52,8 @@ public class NewUserFragment extends Fragment {
     ImageButton tackPic;
     private Bitmap imageBitmap;
     View view;
+    ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,7 +103,11 @@ public class NewUserFragment extends Fragment {
     }
 
     private boolean saveUser() {
-        String tName="q",tPhone="q" ,tPass="q",tPassAg="q";
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("save user...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        String tName,tPhone, tPass,tPassAg;
         User user = new User();
         try{
             tName = name.getText().toString();
@@ -111,16 +118,16 @@ public class NewUserFragment extends Fragment {
         }catch (Exception e){
             return false;
         }
-        if(tName.equals("q")){
+        if(tName.equals("")){
             name.setError("Please add a name");
             return false;
         }
 
-        if(tPhone.equals("q")){
+        if(tPhone.equals("")){
             phone.setError("Please add a phone");
             return false;
         }
-        if(tPass.equals("q")){
+        if(tPass.equals("")){
             password.setError("Please add a password");
             return false;
         }
@@ -129,8 +136,9 @@ public class NewUserFragment extends Fragment {
             passAgain.setError("the password is not equal");
             return false;
         }
-         if(tPass.length()<7){
+         if(tPass.length()<6){
              password.setError("the password is shorter");
+             return false;
          }
 
         user.setPassword(tPass);
@@ -159,6 +167,8 @@ public class NewUserFragment extends Fragment {
                                     sp.edit().putString("myPhone", user.getPhone()).commit();
                                     sp.edit().putString("myName", user.getName()).commit();
                                     Navigation.findNavController(view).popBackStack();
+                                    progressDialog.dismiss();
+
                                 }
                     });
 

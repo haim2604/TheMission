@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "7399b88c09f10afed7d24d066054f5a8",
+    "identityHash": "38a8e3065d7490b84bef416e1e563502",
     "entities": [
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`phone` TEXT NOT NULL, `name` TEXT, `imageUrl` TEXT, `password` TEXT, PRIMARY KEY(`phone`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`phone` TEXT NOT NULL, `name` TEXT, `imageUrl` TEXT, `password` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`phone`))",
         "fields": [
           {
             "fieldPath": "phone",
@@ -30,6 +30,12 @@
             "fieldPath": "password",
             "columnName": "password",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -146,7 +152,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7399b88c09f10afed7d24d066054f5a8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38a8e3065d7490b84bef416e1e563502')"
     ]
   }
 }

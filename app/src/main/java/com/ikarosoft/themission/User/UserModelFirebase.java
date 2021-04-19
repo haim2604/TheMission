@@ -58,8 +58,8 @@ public class UserModelFirebase {
 
     public void addUser(User user, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("project")
-                .document()
+        db.collection("users")
+                .document(user.getPhone())
                 .set(user.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -24,6 +24,8 @@ public class User {
         HashMap<String, Object> result = new HashMap<>();
         result.put("phone", phone);
         result.put("name", name);
+        result.put("imageUrl", imageUrl);
+        result.put("password", password);
         result.put("lastUpdated", FieldValue.serverTimestamp());
         return result;
     }

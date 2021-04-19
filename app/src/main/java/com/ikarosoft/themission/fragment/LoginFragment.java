@@ -56,8 +56,6 @@ public class LoginFragment extends Fragment {
         newUserBtn = view.findViewById(R.id.login_btn_new);
         phone = view.findViewById(R.id.login_username_et);
         pass = view.findViewById(R.id.login_pas_et);
-
-
         sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
 
         connectBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,18 +66,6 @@ public class LoginFragment extends Fragment {
         });
 
         newUserBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_login_to_newUser));
-
-
-        // save data local
-        ref = getContext().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-        //red
-        String tt = ref.getString("test1", "default value or empty");
-        Log.d("TagSave", tt + "");
-        //write
-        SharedPreferences.Editor ed = ref.edit();
-        ed.putString("test1", "test");
-        ed.commit();
-        //end Shared Preferences
 
         return view;
     }
@@ -103,6 +89,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        sp.edit().putString("myPhone", "nn").commit();
 
         myPhone = sp.getString("myPhone", "nn");
         if (!myPhone.equals("nn")){
