@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,7 +61,7 @@ public class AllMissionFragment extends Fragment {
         tvName = view.findViewById(R.id.allmission_tv_name);
         sref = view.findViewById(R.id.allmission_swipe);
 
-        tvName.setText(project.getNumProj());
+        tvName.setText(project.getNameTask());
 
         sref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -166,7 +167,8 @@ public class AllMissionFragment extends Fragment {
         addMissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_allMission_to_newMission);
+                NavDirections action = AllMissionFragmentDirections.actionAllMissionToNewMission(project);
+                Navigation.findNavController(view).navigate(action);
             }
         });
 

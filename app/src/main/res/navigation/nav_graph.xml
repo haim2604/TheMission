@@ -48,7 +48,11 @@
         android:id="@+id/newMissionFragment"
         android:name="com.ikarosoft.themission.fragment.NewMissionFragment"
         android:label="fragment_new_mission"
-        tools:layout="@layout/fragment_new_mission" />
+        tools:layout="@layout/fragment_new_mission" >
+        <argument
+            android:name="project"
+            app:argType="com.ikarosoft.themission.Project.MyProject" />
+    </fragment>
     <fragment
         android:id="@+id/allProjectsFragment"
         android:name="com.ikarosoft.themission.fragment.AllProjectsFragment"

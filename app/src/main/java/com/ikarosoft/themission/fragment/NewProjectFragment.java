@@ -54,7 +54,7 @@ public class NewProjectFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new_project, container, false);
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        nameProj = view.findViewById(R.id.newproj_et_desc);
+        nameProj = view.findViewById(R.id.newmission_et_desc);
         description = view.findViewById(R.id.newproj_et_description);
         tvmyphone = view.findViewById(R.id.newproj_et_user1);
 

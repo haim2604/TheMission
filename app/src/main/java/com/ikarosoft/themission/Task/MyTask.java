@@ -51,6 +51,7 @@ public class MyTask implements Serializable {
         result.put("progress", progress);
         result.put("takenByUser", takenByUser);
         result.put("urlPhotoTask", urlPhotoTask);
+        result.put("users", users);
         result.put("isDeleted", isDeleted);
         result.put("lastUpdated", FieldValue.serverTimestamp());
         return result;

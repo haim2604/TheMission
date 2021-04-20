@@ -41,7 +41,7 @@ public class TaskModelFirebase {
 
         db.collection("task")
                 .whereGreaterThanOrEqualTo("lastUpdated", ts)
-            //    .whereEqualTo("numberProject", myProject)
+                .whereEqualTo("numberProject", myProject)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -68,14 +68,7 @@ public class TaskModelFirebase {
     public void addTask(MyTask myTask, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("task")
-                .document()
-//                .document(myTask.numberTask)
-
-//        db.collection("proj")
-//                .document()
-//                .document("number project..")
-//               .collection("task")
-//                .document("number task")
+                .document(myTask.getNumberTask())
                 .set(myTask.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

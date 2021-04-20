@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newmission_evrybody_cb" />
 
     <EditText
-        android:id="@+id/newproj_et_desc"
+        android:id="@+id/newmission_et_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/newproj_et_name"
+        android:id="@+id/newmission_et_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -87,7 +87,7 @@
         android:text="description"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/newproj_et_desc"
+        app:layout_constraintEnd_toStartOf="@+id/newmission_et_desc"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="350dp"
-        android:text="צריך להתבצע על ידי"
+        android:text="To be performed by "
         android:textSize="24sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"

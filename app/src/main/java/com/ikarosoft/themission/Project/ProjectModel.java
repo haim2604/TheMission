@@ -81,7 +81,6 @@ public class ProjectModel {
     }
 
     public void addProject(MyProject myProject, ListenerVoid listener) {
-        String [] users = myProject.getUsersPhone().split("#");
 
         modelFirebase.addProject(myProject, new ListenerVoid() {
             @Override
