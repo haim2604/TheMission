@@ -149,9 +149,11 @@ public class AllMissionFragment extends Fragment {
         adapter.setOnClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Navigation.findNavController(view).navigate(R.id.action_allMission_to_perframTask);
 
-                Log.d("TAG123", "aaaa  " + position);
+                MyTask task = viewModel.getData().getValue().get(position);
+                NavDirections action = AllMissionFragmentDirections.actionAllMissionToPerframTask(task);
+                Navigation.findNavController(view).navigate(action);
+
             }
         });
 

@@ -1,66 +1,149 @@
 package com.ikarosoft.themission.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
+import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.R;
+import com.ikarosoft.themission.Task.MyTask;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PerframTaskFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class PerframTaskFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    View view;
+    MyTask myTask;
+    ImageView img;
+    TextView name, des, tekenBy, prograss;
+    EditText note;
+    Button confirmBtn;
+    RadioGroup radioGroup;
+    RadioButton selected, beforeFinish, notDone, finished;
+    SeekBar sbProgress;
+    String myPhone;
+    ProgressDialog progressDialog;
+    SharedPreferences sp ;
+    String users;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PerframTaskFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PerframTaskFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PerframTaskFragment newInstance(String param1, String param2) {
-        PerframTaskFragment fragment = new PerframTaskFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfram_task, container, false);
+        view = inflater.inflate(R.layout.fragment_perfram_task, container, false);
+        sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        myPhone = sp.getString("myPhone", "nn");
+
+        img = view.findViewById(R.id.perform_iv_img);
+        name = view.findViewById(R.id.perform_tv_name);
+        des = view.findViewById(R.id.perform_tv_des);
+        tekenBy = view.findViewById(R.id.perform_tv_tekenby);
+        prograss = view.findViewById(R.id.perform_tv_progress);
+        note = view.findViewById(R.id.perform_et_note);
+        confirmBtn = view.findViewById(R.id.perform_btn_confirm);
+        radioGroup = view.findViewById(R.id.perform_radioGroup);
+        selected = view.findViewById(R.id.perform_rb_selected);
+        beforeFinish = view.findViewById(R.id.perform_rb_beforefinish);
+        notDone = view.findViewById(R.id.perform_rb_notfinish);
+        finished = view.findViewById(R.id.perform_rb_finish);
+        sbProgress = view.findViewById(R.id.perform_seekbar_progress);
+
+
+        myTask = PerframTaskFragmentArgs.fromBundle(getArguments()).getMyTask();
+        name.setText(myTask.getNameTask());
+        des.setText(myTask.getDescription());
+        note.setText(myTask.getNote());
+        users = myTask.getUsers();
+        if (!users.contains(myPhone)){
+            sbProgress.setVisibility(View.GONE);
+            prograss.setVisibility(View.GONE);
+            disableAll();
+        }else{
+            sbProgress.setVisibility(View.VISIBLE);
+            prograss.setVisibility(View.VISIBLE);
+            sbProgress.setProgress(Integer.parseInt(myTask.getProgress()));
+            prograss.setText(myTask.getProgress()+"%");
+
+        }
+///        radiobutton1.setClickable(false);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                switch(checkedId)
+                {
+                    case R.id.perform_rb_selected:
+                        Log.d("TAG321", "selected");
+
+                        //enable or disable button
+                        break;
+
+                    case R.id.perform_rb_beforefinish:
+                        Log.d("TAG321", "beforefinish");
+
+                        //enable or disable button
+                        break;
+
+                    case R.id.perform_rb_notfinish:
+                        Log.d("TAG321", "perform_rb_notfinish");
+
+                        //enable or disable button
+                        break;
+                    case R.id.perform_rb_finish:
+                        Log.d("TAG321", "perform_rb_finish");
+
+                        //enable or disable button
+                        break;
+                }
+            }
+        });
+        sbProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                prograss.setText(i+"%");
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        return view;
     }
+
+    private void disableAll() {
+        for(int i = 0; i < 4; i++){
+            ((RadioButton)radioGroup.getChildAt(i)).setEnabled(false);
+        }
+
+    }
+//    progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setMessage("connect...");
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//                          progressDialog.dismiss();
+
 }

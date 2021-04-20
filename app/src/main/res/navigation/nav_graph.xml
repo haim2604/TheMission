@@ -43,7 +43,11 @@
         android:id="@+id/perframTaskFragment"
         android:name="com.ikarosoft.themission.fragment.PerframTaskFragment"
         android:label="fragment_perfram_task"
-        tools:layout="@layout/fragment_perfram_task" />
+        tools:layout="@layout/fragment_perfram_task" >
+        <argument
+            android:name="myTask"
+            app:argType="com.ikarosoft.themission.Task.MyTask" />
+    </fragment>
     <fragment
         android:id="@+id/newMissionFragment"
         android:name="com.ikarosoft.themission.fragment.NewMissionFragment"
