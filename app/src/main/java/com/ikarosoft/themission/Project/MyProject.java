@@ -17,51 +17,54 @@ public class MyProject {
     @PrimaryKey
     @NonNull
     private String numProj;
-    private String name;
-    private String status;
+    private String nameTask;
+    private String statusTask;
     private String usersPhone;
     private String description;
     private Long lastUpdated;
-
+    private boolean isDeleted =false;
     public MyProject() {
 
     }
 
 
-    public MyProject(String number, String name, String status) {
-        this.name= name;
+    public MyProject(String number, String nameTask, String statusTask) {
+        this.nameTask= nameTask;
         this.numProj = number;
-        this.status = status;
+        this.statusTask = statusTask;
     }
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("numProj", numProj);
-        result.put("nameTask", name);
+        result.put("nameTask", nameTask);
         result.put("description", description);
-        result.put("statusTask", status);
-        String users[]= usersPhone.split("#");
-        result.put("usersPhone1", users[0]);
-        result.put("usersPhone2", users[1]);
-        result.put("usersPhone3", users[2]);
-        result.put("usersPhone4", users[3]);
+        result.put("statusTask", statusTask);
+        result.put("usersPhone", usersPhone);
+        result.put("isDeleted", isDeleted);
         result.put("lastUpdated", FieldValue.serverTimestamp());
         return result;
     }
 
     public void fromMap(Map<String, Object> map){
         numProj = (String)map.get("numProj");
-        name = (String)map.get("name");
+        nameTask = (String)map.get("nameTask");
         description = (String)map.get("description");
-        status = (String)map.get("status");
-        usersPhone=(String)map.get("usersPhone1");
-        for (int i = 2; i < 5; i++) {
-            usersPhone= usersPhone+"#"+((String)map.get("usersPhone"+i));
-        }
+        statusTask = (String)map.get("statusTask");
+        usersPhone=(String)map.get("usersPhone");
+        isDeleted=(boolean)map.get("isDeleted");
+
 
         Timestamp ts = (Timestamp)map.get("lastUpdated");
         lastUpdated = ts.getSeconds();
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public String getDescription() {
         return description;
@@ -90,20 +93,20 @@ public class MyProject {
         this.numProj = numProj;
     }
 
-    public String getName() {
-        return name;
+    public String getNameTask() {
+        return nameTask;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameTask(String nameTask) {
+        this.nameTask = nameTask;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusTask() {
+        return statusTask;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusTask(String statusTask) {
+        this.statusTask = statusTask;
     }
 
     public String getUsersPhone() {

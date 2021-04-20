@@ -1,13 +1,17 @@
 package com.ikarosoft.themission.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -41,7 +45,7 @@ public class AllProjectsFragment extends Fragment {
     Button addPorjBtn,setting;
     ProjectAdapterViewModel viewModel;
     SwipeRefreshLayout sref;
-    String myPhone="0545444444";
+    String myPhone;
     View view;
 
 
@@ -85,11 +89,46 @@ public class AllProjectsFragment extends Fragment {
         ProjectAdapter adapter = new ProjectAdapter(viewModel,getLayoutInflater());
         listProj.setAdapter(adapter);
 
+        ItemTouchHelper helper= new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+                // Here is where you'll implement swipe to delete
+                AlertDialog.Builder builder = new AlertDialog.Builder(target.itemView.getContext())
+                        .setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Get the position of the item to be deleted
+                                int position = target.getAdapterPosition();
+                                // Then you can remove this item from the adapter
+                            }
+                });
+                 builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                public void onClick (DialogInterface dialog,int id){
+                                    // User cancelled the dialog,
+                                    // so we will refresh the adapter to prevent hiding the item from UI
+                                 //   mAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                }
+                            });
+                builder.create().show();
+
+                //livedata.remove(pos)
+                //reloada()
+            }
+        });
+        helper.attachToRecyclerView(listProj);
+
         adapter.setOnClickListener(new ProjectAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
                 SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+                myPhone = sp.getString("myPhone", "nn");
                 sp.edit().putString("mySelectProject"+myPhone, viewModel.getData().getValue().get(position).getNumProj()).commit();
                Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
 
@@ -114,16 +153,18 @@ public class AllProjectsFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-        reloadData();
+      //  reloadData();
         return view;
     }
 
     private void reloadData() {
         addPorjBtn.setEnabled(false);
+        setting.setEnabled(false);
         ProjectModel.instance.refreshAllProject(new ListenerVoid() {
             @Override
             public void onComplete() {
                 addPorjBtn.setEnabled(true);
+                setting.setEnabled(true);
                 sref.setRefreshing(false);
 
             }
@@ -133,13 +174,13 @@ public class AllProjectsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        String selectProject = sp.getString("mySelectProject"+myPhone, "nn");
-        if (!selectProject.equals("nn")){
-            Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
-
-        }
+////TODO meybe add in the final
+//        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+//        String selectProject = sp.getString("mySelectProject"+myPhone, "nn");
+//        if (!selectProject.equals("nn")){
+//            Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
+//
+//        }
     }
 
 

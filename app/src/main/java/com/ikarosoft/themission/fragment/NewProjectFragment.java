@@ -124,9 +124,9 @@ public class NewProjectFragment extends Fragment {
 
     private void addProject() {
         MyProject project=new MyProject();
-        project.setName(nameProj.getText().toString());
+        project.setNameTask(nameProj.getText().toString());
         project.setDescription(description.getText().toString());
-        project.setStatus("start");
+        project.setStatusTask("start");
         project.setUsersPhone(myPhone+"#"+sp2.getSelectedItem().toString()+"#"+sp3.getSelectedItem().toString()+"#"+sp4.getSelectedItem().toString());
 
         int min=1000;

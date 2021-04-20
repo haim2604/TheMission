@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "38a8e3065d7490b84bef416e1e563502",
+    "identityHash": "b42b0e844831674497a741575249e156",
     "entities": [
       {
         "tableName": "User",
@@ -50,7 +50,7 @@
       },
       {
         "tableName": "MyTask",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numberTask` TEXT NOT NULL, `nameTask` TEXT, `statusTask` TEXT, `phoneUser` TEXT, `numberProject` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`numberTask`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numberTask` TEXT NOT NULL, `nameTask` TEXT, `statusTask` TEXT, `phoneUser` TEXT, `numberProject` TEXT, `lastUpdated` INTEGER, `description` TEXT, `note` TEXT, `progress` TEXT, `takenByUser` TEXT, `urlPhotoTask` TEXT, `users` TEXT, `isDeleted` INTEGER NOT NULL, PRIMARY KEY(`numberTask`))",
         "fields": [
           {
             "fieldPath": "numberTask",
@@ -87,6 +87,48 @@
             "columnName": "lastUpdated",
             "affinity": "INTEGER",
             "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "progress",
+            "columnName": "progress",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "takenByUser",
+            "columnName": "takenByUser",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "urlPhotoTask",
+            "columnName": "urlPhotoTask",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "users",
+            "columnName": "users",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -100,7 +142,7 @@
       },
       {
         "tableName": "MyProject",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numProj` TEXT NOT NULL, `name` TEXT, `status` TEXT, `usersPhone` TEXT, `description` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`numProj`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numProj` TEXT NOT NULL, `name` TEXT, `status` TEXT, `usersPhone` TEXT, `description` TEXT, `lastUpdated` INTEGER, `isDeleted` INTEGER NOT NULL, PRIMARY KEY(`numProj`))",
         "fields": [
           {
             "fieldPath": "numProj",
@@ -137,6 +179,12 @@
             "columnName": "lastUpdated",
             "affinity": "INTEGER",
             "notNull": false
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -152,7 +200,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38a8e3065d7490b84bef416e1e563502')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b42b0e844831674497a741575249e156')"
     ]
   }
 }

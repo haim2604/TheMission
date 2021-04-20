@@ -38,12 +38,9 @@ public class ProjectModelFirebase {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Timestamp ts = new Timestamp(lastUpdated, 0);
 
-        db.collection("project")
-                .whereGreaterThanOrEqualTo("lastUpdated", ts)
-                //.whereEqualTo("usersPhone1",myPhone)
-              //  .whereArrayContainsAny(Arrays.asList("usersPhone1","usersPhone2","usersPhone3","usersPhone4"),myPhone)
 
-               // .whereArrayContains("",myPhone)
+        db.collection("project")
+             //  .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -52,9 +49,10 @@ public class ProjectModelFirebase {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
                                 MyProject pt = new MyProject();
                                 pt.fromMap(doc.getData());
-//                                MyTask tt = doc.toObject(MyTask.class);
-                                data.add(pt);
-                                Log.d("TAGBACK", doc.getId() + " => " + doc.getData());
+                                if (pt.getUsersPhone().contains(myPhone)){
+                                    data.add(pt);
+                                    Log.d("TAGBACK", doc.getId() + " => " + doc.getData());
+                                }
 
                             }
                         } else {

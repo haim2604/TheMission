@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012"
-        app:srcCompat="@drawable/avatar" />
+        app:srcCompat="@drawable/brief" />
 
     <View
         android:id="@+id/divider"
@@ -37,32 +37,36 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/porjrow_name_tv"
+            android:id="@+id/porjrow_tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="name proj"
+            android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/projrow_number_tv"
+            android:id="@+id/projrow_tv_des"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="number porject"
+            android:gravity="center"
+            android:text="description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/porjrow_name_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/porjrow_tv_name" />
 
         <TextView
-            android:id="@+id/porjrow_status_tv"
+            android:id="@+id/porjrow_tv_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="status  task"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/projrow_number_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/projrow_tv_des" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

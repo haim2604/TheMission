@@ -22,7 +22,14 @@ public class MyTask implements Serializable {
     String phoneUser;
     public String numberProject;
     private Long lastUpdated;
-//    private boolean isDeleted = false;
+    String description;
+    String note;
+    String progress;
+    String takenByUser;
+    String urlPhotoTask;
+    String users;
+
+   private boolean isDeleted = false;
 
     public Long getLastUpdated() {
         return lastUpdated;
@@ -39,6 +46,12 @@ public class MyTask implements Serializable {
         result.put("statusTask", statusTask);
         result.put("phoneUser", phoneUser);
         result.put("numberProject", numberProject);
+        result.put("description", description);
+        result.put("note", note);
+        result.put("progress", progress);
+        result.put("takenByUser", takenByUser);
+        result.put("urlPhotoTask", urlPhotoTask);
+        result.put("isDeleted", isDeleted);
         result.put("lastUpdated", FieldValue.serverTimestamp());
         return result;
     }
@@ -49,6 +62,12 @@ public class MyTask implements Serializable {
         statusTask = (String)map.get("statusTask");
         phoneUser = (String)map.get("phoneUser");
         numberProject = (String)map.get("numberProject");
+        note = (String)map.get("note");
+        progress = (String)map.get("progress");
+        takenByUser = (String)map.get("takenByUser");
+        urlPhotoTask = (String)map.get("urlPhotoTask");
+        users = (String)map.get("users");
+        isDeleted =(boolean)map.get("isDeleted");
         Timestamp ts = (Timestamp)map.get("lastUpdated");
         lastUpdated = ts.getSeconds();
         //long time = ts.toDate().getTime();
@@ -100,6 +119,73 @@ public class MyTask implements Serializable {
 
     }
 
+    public void setPhoneUser(String phoneUser) {
+        this.phoneUser = phoneUser;
+    }
+
+    public String getNumberProject() {
+        return numberProject;
+    }
+
+    public void setNumberProject(String numberProject) {
+        this.numberProject = numberProject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
+    }
+
+    public String getTakenByUser() {
+        return takenByUser;
+    }
+
+    public void setTakenByUser(String takenByUser) {
+        this.takenByUser = takenByUser;
+    }
+
+    public String getUrlPhotoTask() {
+        return urlPhotoTask;
+    }
+
+    public void setUrlPhotoTask(String urlPhotoTask) {
+        this.urlPhotoTask = urlPhotoTask;
+    }
+
+    public String getUsers() {
+        return users;
+    }
+
+    public void setUsers(String users) {
+        this.users = users;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public MyTask(){
 

@@ -30,15 +30,11 @@ public class ProjectModel {
     String myPhone = sp.getString("myPhone", "0222222222");
 
     public LiveData<List<MyProject>> getAllProject() {
-        Log.d("TAGf"," getAllProject  ");
 
-        if (taskList == null) {
             taskList = modelSql.getAllProj(myPhone);
-            Log.d("TAGf"," getAllProject sql ");
 
             refreshAllProject(null);
-        }
-        // modelSql.getAllTask(listener);
+
         return taskList;
     }
 
@@ -50,7 +46,6 @@ public class ProjectModel {
 
         SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
         long lastUpdated = sp.getLong("lastUpdatedProj"+myPhone, 0);
-
         //2.get all update record from firebase form the last update data
         modelFirebase.getAllProject(myPhone,lastUpdated, new MyListener<List<MyProject>>() {
             @Override
@@ -60,8 +55,6 @@ public class ProjectModel {
 
                 //3.insret the new updete to local db
                 for (MyProject p : result) {
-
-                    Log.d("TAGf"," back from firebase ");
 
                     modelSql.addProject(p, null);
                     if (p.getLastUpdated() > lastU) {
