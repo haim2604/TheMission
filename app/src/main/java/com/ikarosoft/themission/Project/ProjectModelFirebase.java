@@ -40,7 +40,8 @@ public class ProjectModelFirebase {
 
 
         db.collection("project")
-             //  .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                .whereEqualTo("isDeleted", false)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -66,9 +67,11 @@ public class ProjectModelFirebase {
     }
 
     public void addProject(MyProject myProject, ListenerVoid listener) {
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("project")
-                .document()
+                .document(myProject.getNumProj())
                 .set(myProject.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -109,7 +112,7 @@ public class ProjectModelFirebase {
                 });
     }
 
-    public void deleteProject(MyProject myProject, ListenerVoid listener) {
+    public void deleteProjectO(MyProject myProject, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("project").document(myProject.getNumProj())
                 .delete()
@@ -120,6 +123,28 @@ public class ProjectModelFirebase {
 
                     }
                 });
+
+    }
+
+
+
+    public void deleteProject(MyProject myProject, ListenerVoid listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("project").document(myProject.getNumProj())
+                .update("isDeleted",true)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        listener.onComplete();
+
+                    }
+                });
+
+
+
+
+//
+
 
     }
 

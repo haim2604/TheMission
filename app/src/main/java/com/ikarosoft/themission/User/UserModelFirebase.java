@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,21 +33,22 @@ public class UserModelFirebase {
     List<User> data;
 
 
-    public void getAllUser(MyListener <List<User>> listener) {
+    public void getAllUser(long lastUpdated,MyListener <List<User>> listener) {
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Timestamp ts = new Timestamp(lastUpdated, 0);
+
         db.collection("users")
-               //filter if we want .whereEqualTo("capital", true)
+                 .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .get()
                  .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-                                User ut = doc.toObject(User.class);
-                                data.add(ut);
-                                Log.d("TAG", doc.getId() + " => " + doc.getData());
-
+                                User us = new User();
+                                us.fromMap(doc.getData());
+                                data.add(us);
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

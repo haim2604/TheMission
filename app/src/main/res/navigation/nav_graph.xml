@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_allMission_to_newMission"
             app:destination="@id/newMissionFragment" />
+        <argument
+            android:name="project"
+            app:argType="com.ikarosoft.themission.Project.MyProject" />
 
     </fragment>
     <fragment
@@ -65,12 +68,7 @@
         android:id="@+id/newProjectFragment"
         android:name="com.ikarosoft.themission.fragment.NewProjectFragment"
         android:label="fragment_new_project"
-        tools:layout="@layout/fragment_new_project" >
-        <action
-            android:id="@+id/action_newProjectFragment_pop"
-            app:popUpTo="@id/allMissionFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/fragment_new_project" />
     <fragment
         android:id="@+id/setting2"
         android:name="com.ikarosoft.themission.Setting"

@@ -8,11 +8,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 import com.ikarosoft.themission.User.User;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-public class MyProject {
+public class MyProject implements Serializable {
 
     @PrimaryKey
     @NonNull

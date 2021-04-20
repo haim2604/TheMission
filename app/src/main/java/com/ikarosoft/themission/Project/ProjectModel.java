@@ -98,7 +98,12 @@ public class ProjectModel {
     }
 
     public void deleteProject(MyProject myProject, ListenerVoid listener) {
-        modelFirebase.deleteProject(myProject, listener);
+        modelSql.deleteTask(myProject, new ListenerVoid() {
+            @Override
+            public void onComplete() {
+                modelFirebase.deleteProject(myProject, listener);
+            }
+        });
     }
 
     public void uploadImage(Bitmap bitmap, String name, final MyListener<String> listener) {

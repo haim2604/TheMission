@@ -1,11 +1,14 @@
 package com.ikarosoft.themission.User;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,13 +24,14 @@ import com.google.firebase.storage.UploadTask;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
+import com.ikarosoft.themission.Project.MyProject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class UserModel {
     public final static UserModel instance = new UserModel();
-    ModelSqlClass sqlClass = new ModelSqlClass();
+    UserModelSql modelSql = new UserModelSql();
 
     UserModelFirebase modelFirebase = new UserModelFirebase();
     private FirebaseAuth mAuth;
@@ -35,6 +39,51 @@ public class UserModel {
     private UserModel() {
 
     }
+
+    LiveData<List<User>> userList;
+   // SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+   // String myPhone = sp.getString("myPhone", "0222222222");
+
+    public LiveData<List<User>> getAllUsers() {
+        userList = modelSql.getAllUser();
+        refreshAllUser(null);
+        return userList;
+    }
+
+    public void refreshAllUser(final ListenerVoid listener) {
+
+        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        String myPhone = sp.getString("myPhone", "0222222222");
+        long lastUpdated = sp.getLong("lastUpdatedUser", 0);
+        //2.get all update record from firebase form the last update data
+        modelFirebase.getAllUser(lastUpdated, new MyListener<List<User>>() {
+            @Override
+            public void onComplete(List<User> result) {
+
+                long lastU = 0;
+
+                //3.insret the new updete to local db
+                for (User us : result) {
+
+                    modelSql.addUser(us, null);
+                    if (us.getLastUpdated() > lastU) {
+                        lastU = us.getLastUpdated();
+                    }
+                }
+                //4.update the local last update date
+                sp.edit().putLong("lastUpdatedUser", lastU).commit();
+
+                //5.return the update data to the listeners
+                if (listener != null) {
+                    listener.onComplete();
+                }
+            }
+        });
+
+    }
+
+
+
     public void addUser(User user, ListenerVoid listener) {
 
         modelFirebase.addUser(user,listener);
@@ -163,12 +212,12 @@ public class UserModel {
 //    }
 
     //TODO l;fsfs;
-//public void getAllUser(GetAllUserListener listener){
-    public void getAllUser(MyListener<List<User>> listener) {
-        //sqlClass.getAllUser(listener);
-        // modelfirebaseClass.getAllUser(listener);
-       modelFirebase.getAllUser(listener);
-    }
+////public void getAllUser(GetAllUserListener listener){
+//    public void getAllUser(MyListener<List<User>> listener) {
+//        //sqlClass.getAllUser(listener);
+//        // modelfirebaseClass.getAllUser(listener);
+//       modelFirebase.getAllUser(listener);
+//    }
 
     public interface AddUserListener {
         void onComplete();

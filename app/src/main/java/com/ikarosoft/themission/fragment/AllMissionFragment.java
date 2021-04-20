@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MissionAdapterViewModel;
 import com.ikarosoft.themission.MyListener;
+import com.ikarosoft.themission.Project.MyProject;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.Task.TaskModel;
 import com.ikarosoft.themission.adapters.MyAdapter;
@@ -46,16 +47,7 @@ public class AllMissionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_mission, container, false);
         viewModel = new ViewModelProvider(this).get(MissionAdapterViewModel.class);
 
-//      //  String idd = AllMissionFragmentArgs.fromBundle(getArguments()).getUserd();
-//
-//        //TODO : arg object
-//      //  MyTask task = AllMissionFragmentArgs.fromBundle(getArguments()).getTes();
-//        Log.d("TAGAr", idd + "  " + task.getNameTask());
-//
-//        FirebaseUser result = AllMissionFragmentArgs.fromBundle(getArguments()).getUser();
-//        Log.d("TAGLOGIN", idd + "  " + result.getUid()+"  ...."+result.getEmail());
-
-
+        MyProject project = AllMissionFragmentArgs.fromBundle(getArguments()).getProject();
 
         replaceBtn = view.findViewById(R.id.allmission_btn_proje_replace);
         addMissionBtn = view.findViewById(R.id.allproj_btn_newproj);

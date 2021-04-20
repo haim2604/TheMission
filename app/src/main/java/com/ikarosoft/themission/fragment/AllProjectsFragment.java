@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -105,11 +106,20 @@ public class AllProjectsFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 // Get the position of the item to be deleted
                                 int position = target.getAdapterPosition();
+                                MyProject project= viewModel.getData().getValue().get(position);
+                                ProjectModel.instance.deleteProject(project, new ListenerVoid() {
+                                    @Override
+                                    public void onComplete() {
+
+                                    }
+                                });
+
                                 // Then you can remove this item from the adapter
                             }
                 });
                  builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
                                 public void onClick (DialogInterface dialog,int id){
+                                    reloadData();
                                     // User cancelled the dialog,
                                     // so we will refresh the adapter to prevent hiding the item from UI
                                  //   mAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
@@ -127,10 +137,10 @@ public class AllProjectsFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
 
-                SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-                myPhone = sp.getString("myPhone", "nn");
-                sp.edit().putString("mySelectProject"+myPhone, viewModel.getData().getValue().get(position).getNumProj()).commit();
-               Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
+                MyProject project=new MyProject();
+                project = viewModel.getData().getValue().get(position);
+                NavDirections action = AllProjectsFragmentDirections.actionAllProjToAllMission(project);
+               Navigation.findNavController(view).navigate(action);
 
                 Log.d("TAG123","aaaa allll prog selecte "+position+"......"+viewModel.getData().getValue().get(position).getNumProj());
             }

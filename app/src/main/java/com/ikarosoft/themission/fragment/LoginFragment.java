@@ -102,6 +102,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("start...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
