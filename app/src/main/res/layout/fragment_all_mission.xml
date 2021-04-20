@@ -9,37 +9,50 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <Button
+        android:id="@+id/allmission_btn_setting"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:background="@drawable/set1"
+        android:scaleX="1.7"
+        android:scaleY="1.7"
+        android:textColorLink="@color/m_bluedark"
+        app:backgroundTint="@color/m_bluedark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 
+        android:id="@+id/allmission_swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="90dp"
 
+        android:layout_marginBottom="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        android:id="@+id/allmission_swipe">
+        app:layout_constraintTop_toBottomOf="@+id/allmission_tv_name">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/allmission_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/allmission_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <Button
-        android:id="@+id/allproj_btn_newproj"
+        android:id="@+id/allmission_btn_newtask"
         android:layout_width="120dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:background="@android:drawable/ic_input_add"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:textColorLink="@color/m_blue"
         app:backgroundTint="@color/m_bluedark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,30 +61,30 @@
 
     <Button
         android:id="@+id/allmission_btn_proje_replace"
-        android:layout_width="97dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:drawable/stat_notify_sync_noanim"
-        app:backgroundTint="@color/m_bluedark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/rotation"
+        android:textColorLink="@color/m_blue"
+        app:backgroundTint="@color/m_grean"
+        app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allmission_recyclerView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/allmission_tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="32dp"
         android:gravity="center_horizontal"
         android:text="all missin"
         android:textColor="#E8F5E9"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/allmission_btn_proje_replace"
+        app:layout_constraintEnd_toStartOf="@+id/allmission_btn_proje_replace"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/allmission_btn_proje_replace" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

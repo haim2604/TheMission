@@ -23,19 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.ikarosoft.themission.ListenerVoid;
-import com.ikarosoft.themission.MissionAdapterViewModel;
 import com.ikarosoft.themission.MyApplication;
-import com.ikarosoft.themission.MyListener;
 import com.ikarosoft.themission.Project.ProjectModel;
 import com.ikarosoft.themission.ProjectAdapterViewModel;
 import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.Task.MyTask;
-import com.ikarosoft.themission.User.UserModel;
 import com.ikarosoft.themission.adapters.ProjectAdapter;
 import com.ikarosoft.themission.Project.MyProject;
-import com.ikarosoft.themission.Project.ProjectModelteee;
 
 import java.util.List;
 
@@ -58,7 +52,7 @@ public class AllProjectsFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ProjectAdapterViewModel.class);
 
         sref = view.findViewById(R.id.allproj_swipe);
-        addPorjBtn = view.findViewById(R.id.allproj_btn_newproj);
+        addPorjBtn = view.findViewById(R.id.allmission_btn_newtask);
         listProj = view.findViewById(R.id.allproj_recyclerView);
         setting = view.findViewById(R.id.allproj_btn_setting);
 
@@ -138,7 +132,12 @@ public class AllProjectsFragment extends Fragment {
             public void onItemClick(int position) {
 
                 MyProject project=new MyProject();
+
+
                 project = viewModel.getData().getValue().get(position);
+                SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+                sp.edit().putString("myProject", project.getNumProj()).commit();
+
                 NavDirections action = AllProjectsFragmentDirections.actionAllProjToAllMission(project);
                Navigation.findNavController(view).navigate(action);
 

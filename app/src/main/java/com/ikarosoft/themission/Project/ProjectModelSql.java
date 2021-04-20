@@ -51,7 +51,7 @@ public class ProjectModelSql {
     }
 
 
-    public void deleteTask(MyProject project,ListenerVoid listener){
+    public void deleteProject(MyProject project,ListenerVoid listener){
         @SuppressLint("StaticFieldLeak")
         AsyncTask task = new AsyncTask() {
             @Override

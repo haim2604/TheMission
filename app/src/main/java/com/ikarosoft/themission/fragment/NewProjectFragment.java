@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +20,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.Project.MyProject;
 import com.ikarosoft.themission.Project.ProjectModel;
-import com.ikarosoft.themission.ProjectAdapterViewModel;
 import com.ikarosoft.themission.R;
-import com.ikarosoft.themission.Task.MyTask;
 import com.ikarosoft.themission.User.User;
 import com.ikarosoft.themission.User.UserModel;
 import com.ikarosoft.themission.UserViewModel;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 
 public class NewProjectFragment extends Fragment {
@@ -60,7 +54,7 @@ public class NewProjectFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new_project, container, false);
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        nameProj = view.findViewById(R.id.newproj_et_name);
+        nameProj = view.findViewById(R.id.newproj_et_desc);
         description = view.findViewById(R.id.newproj_et_description);
         tvmyphone = view.findViewById(R.id.newproj_et_user1);
 

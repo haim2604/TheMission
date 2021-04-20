@@ -98,7 +98,7 @@ public class ProjectModel {
     }
 
     public void deleteProject(MyProject myProject, ListenerVoid listener) {
-        modelSql.deleteTask(myProject, new ListenerVoid() {
+        modelSql.deleteProject(myProject, new ListenerVoid() {
             @Override
             public void onComplete() {
                 modelFirebase.deleteProject(myProject, listener);

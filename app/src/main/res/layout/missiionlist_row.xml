@@ -58,31 +58,46 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="status  task"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/missionrow_name_tv" />
+            app:layout_constraintHeight_percent="0.33"
+
+            app:layout_constraintTop_toBottomOf="@+id/missionrow_tv_des"
+            app:layout_constraintVertical_weight="2" />
 
         <TextView
-            android:id="@+id/missionrow_name_tv"
+            android:id="@+id/missionrow_tv_des"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="name task"
+            android:gravity="center"
+            android:text="descrip"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/missionrow_number_tv" />
+            app:layout_constraintHeight_percent="1"
+
+            app:layout_constraintTop_toBottomOf="@+id/missionrow_tv_name"
+            app:layout_constraintVertical_weight="2" />
 
         <TextView
-            android:id="@+id/missionrow_number_tv"
+            android:id="@+id/missionrow_tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="number task"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHeight_percent="0.33"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

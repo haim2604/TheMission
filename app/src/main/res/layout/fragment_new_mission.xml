@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newmission_evrybody_cb" />
 
     <EditText
-        android:id="@+id/newproj_et_name"
+        android:id="@+id/newproj_et_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,30 +33,49 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorLink="@color/m_bluedark"
+        app:backgroundTint="@color/m_grean"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10" />
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/newproj_et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorLink="@color/m_bluedark"
+        app:backgroundTint="@color/m_grean"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/newmission_ib_tackpic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:background="#00FFFFFF"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/newmission_iv_avatar"
+        app:layout_constraintStart_toEndOf="@+id/newmission_iv_avatar" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/newmission_iv_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:src="@android:drawable/ic_menu_agenda"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/clipboard" />
 
     <TextView
         android:id="@+id/textView10"
@@ -65,22 +84,36 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="mission name"
+        android:text="description"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/newproj_et_name"
+        app:layout_constraintEnd_toStartOf="@+id/newproj_et_desc"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="mission name"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newmission_iv_avatar" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginBottom="350dp"
         android:text="צריך להתבצע על ידי"
         android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -90,63 +123,72 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="user 1"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/newmission_user2_cb"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/newmission_user2_cb"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <CheckBox
         android:id="@+id/newmission_user2_cb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="user 2"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/newmission_user1_cb"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintWidth_percent=".4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newmission_user1_cb" />
 
     <CheckBox
         android:id="@+id/newmission_user3_cb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="user 3"
         android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newmission_user2_cb"
-        app:layout_constraintWidth_percent=".4" />
+        app:layout_constraintTop_toBottomOf="@+id/newmission_user2_cb" />
 
     <CheckBox
         android:id="@+id/newmission_user4_cb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="user 4"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/newmission_user3_cb"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/newmission_user3_cb"
-        app:layout_constraintTop_toTopOf="@+id/newmission_user3_cb"
-        app:layout_constraintWidth_percent=".4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newmission_user3_cb" />
 
     <CheckBox
         android:id="@+id/newmission_evrybody_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="60dp"
-        android:text="evrybody"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="everybody"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newmission_user3_cb" />
+        app:layout_constraintTop_toBottomOf="@+id/newmission_user4_cb" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

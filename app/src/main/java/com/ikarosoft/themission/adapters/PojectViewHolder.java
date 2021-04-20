@@ -26,7 +26,7 @@ public class PojectViewHolder extends RecyclerView.ViewHolder {
         nameProject = itemView.findViewById(R.id.porjrow_tv_name);
         statusProject = itemView.findViewById(R.id.porjrow_tv_status);
         imageProject = itemView.findViewById(R.id.projrow_avatar_iv);
-        ;
+
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

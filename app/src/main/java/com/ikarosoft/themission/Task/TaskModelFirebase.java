@@ -20,6 +20,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyListener;
+import com.ikarosoft.themission.Project.MyProject;
 import com.ikarosoft.themission.User.User;
 import com.ikarosoft.themission.User.UserModel;
 
@@ -32,7 +33,7 @@ public class TaskModelFirebase {
     // Access a Cloud Firestore instance from your Activity
     List<MyTask> data;
 
-    public void getAllTask(long lastUpdated, MyListener<List<MyTask>> listener) {
+    public void getAllTask(String myProject, long lastUpdated, MyListener<List<MyTask>> listener) {
         //TODO fix filter
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,7 +41,7 @@ public class TaskModelFirebase {
 
         db.collection("task")
                 .whereGreaterThanOrEqualTo("lastUpdated", ts)
-                //filter if we want .whereEqualTo("capital", true)
+            //    .whereEqualTo("numberProject", myProject)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -115,6 +116,19 @@ public class TaskModelFirebase {
                 });
     }
 
+    public void deleteTask(MyTask myTask, ListenerVoid listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("task").document(myTask.getNumberTask())
+                .update("isDeleted",true)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        listener.onComplete();
+
+                    }
+                });
+
+    }
     public void deleteUser(MyTask myTask, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("task").document(myTask.getPhoneUser())

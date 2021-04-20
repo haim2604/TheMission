@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.ikarosoft.themission.ListenerVoid;
@@ -23,9 +24,10 @@ import java.util.Random;
 
 public class NewMissionFragment extends Fragment {
     NewMissionViewModel viewModel;
-    EditText taskName;
+    EditText taskName,des;
     Button addB;
     View view;
+    CheckBox cbUser1,cbUser2,cbUser3,cbUser4,cbEverybody;
    // String numProject,phoneUser,nameTask,numberTask;
 
 
@@ -36,7 +38,18 @@ public class NewMissionFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new_mission, container, false);
         viewModel = new ViewModelProvider(this).get(NewMissionViewModel.class);
         taskName= view.findViewById(R.id.newproj_et_name);
+        des= view.findViewById(R.id.newproj_et_desc);
         addB = view.findViewById(R.id.newmission_btn_addmiss);
+        cbUser1=view.findViewById(R.id.newmission_user1_cb);
+        cbUser2=view.findViewById(R.id.newmission_user2_cb);
+        cbUser3=view.findViewById(R.id.newmission_user3_cb);
+        cbUser4=view.findViewById(R.id.newmission_user4_cb);
+        cbEverybody=view.findViewById(R.id.newmission_evrybody_cb);
+
+
+       //get project
+
+
 
         addB.setOnClickListener(new View.OnClickListener() {
             @Override

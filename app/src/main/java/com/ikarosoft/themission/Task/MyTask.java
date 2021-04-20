@@ -62,6 +62,7 @@ public class MyTask implements Serializable {
         statusTask = (String)map.get("statusTask");
         phoneUser = (String)map.get("phoneUser");
         numberProject = (String)map.get("numberProject");
+        description = (String)map.get("description");
         note = (String)map.get("note");
         progress = (String)map.get("progress");
         takenByUser = (String)map.get("takenByUser");

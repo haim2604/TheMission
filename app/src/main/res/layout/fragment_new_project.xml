@@ -11,7 +11,7 @@
 
 
     <EditText
-        android:id="@+id/newproj_et_name"
+        android:id="@+id/newproj_et_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -53,7 +53,7 @@
         android:text="project name"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/newproj_et_name"
+        app:layout_constraintEnd_toStartOf="@+id/newproj_et_desc"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintStart_toStartOf="parent"

@@ -22,35 +22,31 @@ public class TaskModel {
 
     TaskModelFirebase modelFirebase = new TaskModelFirebase();
     TaskModelSql modelSql = new TaskModelSql();
+    SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+    String myProject;
 
     private TaskModel() {
     }
 
-    //    public void getAllTask(MyListener<List<MyTask>> listener){
-//       // modelFirebase.getAllTask(listener);
-//        modelSql.getAllTask(listener);
-//    }
     LiveData<List<MyTask>> taskList;
 
     public LiveData<List<MyTask>> getAllTask() {
-        if (taskList == null) {
-            taskList = modelSql.getAllTask();
+        myProject = sp.getString("myProject", "nn");
+        taskList = modelSql.getAllTask(myProject);
+        refreshAllTask(null);
 
-
-            refreshAllTask(null);
-        }
-        // modelSql.getAllTask(listener);
         return taskList;
     }
 
     public void refreshAllTask(final ListenerVoid listener) {
         //1.get local last updeat data
 
-        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        myProject = sp.getString("myProject", "nn");
+
         long lastUpdated = sp.getLong("lastUpdated", 0);
 
         //2.get all update record from firebase form the last update data
-        modelFirebase.getAllTask(lastUpdated, new MyListener<List<MyTask>>() {
+        modelFirebase.getAllTask(myProject,lastUpdated, new MyListener<List<MyTask>>() {
             @Override
             public void onComplete(List<MyTask> result) {
 
@@ -106,8 +102,14 @@ public class TaskModel {
         //modelSql.addTask(myTask,listener);
     }
 
-    public void deleteUser(MyTask myTask, ListenerVoid listener) {
-        modelFirebase.deleteUser(myTask, listener);
+    public void deleteTask(MyTask myTask, ListenerVoid listener) {
+        modelSql.deleteTask(myTask, new ListenerVoid() {
+            @Override
+            public void onComplete() {
+                modelFirebase.deleteTask(myTask, listener);
+
+            }
+        });
     }
 
     public void uploadImage(Bitmap bitmap, String name, final MyListener<String> listener) {
