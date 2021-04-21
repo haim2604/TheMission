@@ -14,7 +14,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
@@ -40,7 +39,6 @@ import com.ikarosoft.themission.User.UserModel;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Random;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -51,14 +49,12 @@ public class NewMissionFragment extends Fragment {
     ProgressDialog progressDialog;
     private Bitmap imageBitmap;
 
-
     EditText taskName, des;
     Button addB;
     ImageView avatar;
     ImageButton tackPic;
     View view;
     CheckBox cbUser1, cbUser2, cbUser3, cbUser4, cbEverybody;
-    // String numProject,phoneUser,nameTask,numberTask;
     MyProject project;
     String[] users;
     boolean tackP = false;
@@ -84,11 +80,26 @@ public class NewMissionFragment extends Fragment {
         project = AllMissionFragmentArgs.fromBundle(getArguments()).getProject();
         users = project.getUsersPhone().split("#");
         cbUser1.setText(users[0]);
-        cbUser2.setText(users[1]);
-        cbUser3.setText(users[2]);
-        cbUser4.setText(users[3]);
-        //get project
+        if (users[1].equals("NONE")) {
+            cbUser2.setVisibility(View.GONE);
+        } else {
+            cbUser2.setVisibility(View.VISIBLE);
+            cbUser2.setText(users[1]);
+        }
 
+        if (users[2].equals("NONE")) {
+            cbUser3.setVisibility(View.GONE);
+        } else {
+            cbUser3.setVisibility(View.VISIBLE);
+            cbUser3.setText(users[2]);
+        }
+
+        if (users[3].equals("NONE")) {
+            cbUser4.setVisibility(View.GONE);
+        } else {
+            cbUser4.setVisibility(View.VISIBLE);
+            cbUser4.setText(users[3]);
+        }
 
         tackPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,12 +145,12 @@ public class NewMissionFragment extends Fragment {
 
         String sName = taskName.getText().toString();
         String sDes = des.getText().toString();
-        if (sName.equals("")){
+        if (sName.equals("")) {
             taskName.setError("Please add a name");
             progressDialog.dismiss();
             return false;
         }
-        if (sDes.equals("")){
+        if (sDes.equals("")) {
             taskName.setError("Please add a description");
             progressDialog.dismiss();
             return false;
@@ -155,20 +166,20 @@ public class NewMissionFragment extends Fragment {
         task.setDeleted(false);
         task.setProgress("0");
         task.setNote("");
-        String nUsers = "n";
+        String nUsers = "";
         if (cbUser1.isChecked()) {
             nUsers = users[0] + "#";
         }
-        if (cbUser2.isChecked()) {
-            nUsers = users[1] + "#";
+        if (cbUser2.isChecked() && (!users[1].equals("NONE"))) {
+            nUsers = nUsers + users[1] + "#";
         }
-        if (cbUser3.isChecked()) {
-            nUsers = users[2] + "#";
+        if (cbUser3.isChecked() && (!users[2].equals("NONE"))) {
+            nUsers = nUsers + users[2] + "#";
         }
-        if (cbUser4.isChecked()) {
-            nUsers = users[3];
+        if (cbUser4.isChecked() && (!users[3].equals("NONE"))) {
+            nUsers = nUsers + users[3];
         }
-        if (!nUsers.equals("n")) {
+        if (!nUsers.equals("")) {
             task.setUsers(nUsers);
 
             if (tackP) {
@@ -192,7 +203,7 @@ public class NewMissionFragment extends Fragment {
                 saveTask();
             }
             return true;
-        }else {
+        } else {
             cbUser1.setError("Please select at least one");
             progressDialog.dismiss();
 
@@ -206,9 +217,7 @@ public class NewMissionFragment extends Fragment {
         TaskModel.instance.addTask(task, new ListenerVoid() {
             @Override
             public void onComplete() {
-//                SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-//                sp.edit().putString("myPhone", user.getPhone()).commit();
-//                sp.edit().putString("myName", user.getName()).commit();
+
                 Navigation.findNavController(view).popBackStack();
                 progressDialog.dismiss();
             }

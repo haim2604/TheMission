@@ -29,7 +29,7 @@ public class MyTask implements Serializable {
     String urlPhotoTask;
     String users;
 
-   private boolean isDeleted = false;
+    private boolean isDeleted = false;
 
     public Long getLastUpdated() {
         return lastUpdated;
@@ -57,20 +57,20 @@ public class MyTask implements Serializable {
         return result;
     }
 
-    public void fromMap(Map<String, Object> map){
-        numberTask = (String)map.get("numberTask");
-        nameTask = (String)map.get("nameTask");
-        statusTask = (String)map.get("statusTask");
-        phoneUser = (String)map.get("phoneUser");
-        numberProject = (String)map.get("numberProject");
-        description = (String)map.get("description");
-        note = (String)map.get("note");
-        progress = (String)map.get("progress");
-        takenByUser = (String)map.get("takenByUser");
-        urlPhotoTask = (String)map.get("urlPhotoTask");
-        users = (String)map.get("users");
-        isDeleted =(boolean)map.get("isDeleted");
-        Timestamp ts = (Timestamp)map.get("lastUpdated");
+    public void fromMap(Map<String, Object> map) {
+        numberTask = (String) map.get("numberTask");
+        nameTask = (String) map.get("nameTask");
+        statusTask = (String) map.get("statusTask");
+        phoneUser = (String) map.get("phoneUser");
+        numberProject = (String) map.get("numberProject");
+        description = (String) map.get("description");
+        note = (String) map.get("note");
+        progress = (String) map.get("progress");
+        takenByUser = (String) map.get("takenByUser");
+        urlPhotoTask = (String) map.get("urlPhotoTask");
+        users = (String) map.get("users");
+        isDeleted = (boolean) map.get("isDeleted");
+        Timestamp ts = (Timestamp) map.get("lastUpdated");
         lastUpdated = ts.getSeconds();
         //long time = ts.toDate().getTime();
     }
@@ -103,20 +103,20 @@ public class MyTask implements Serializable {
         this.numberTask = numberTask;
     }
 
-    public MyTask(String nameTask, String statusTask,String phoneUser ,String numberProject) {
-        this.numberTask = phoneUser+"_"+numberProject;
+    public MyTask(String nameTask, String statusTask, String phoneUser, String numberProject) {
+        this.numberTask = phoneUser + "_" + numberProject;
         this.nameTask = nameTask;
         this.statusTask = statusTask;
-        this.phoneUser= phoneUser;
+        this.phoneUser = phoneUser;
         this.numberProject = numberProject;
 
     }
 
-    public MyTask(String nameTask, String statusTask,String phoneUser ,String numberProject,String numberTask) {
+    public MyTask(String nameTask, String statusTask, String phoneUser, String numberProject, String numberTask) {
         this.numberTask = numberTask;
         this.nameTask = nameTask;
         this.statusTask = statusTask;
-        this.phoneUser= phoneUser;
+        this.phoneUser = phoneUser;
         this.numberProject = numberProject;
 
     }
@@ -189,7 +189,7 @@ public class MyTask implements Serializable {
         isDeleted = deleted;
     }
 
-    public MyTask(){
+    public MyTask() {
 
     }
 }

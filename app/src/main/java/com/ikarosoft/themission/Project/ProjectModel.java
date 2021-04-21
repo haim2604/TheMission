@@ -10,9 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.ikarosoft.themission.ListenerVoid;
 import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
-import com.ikarosoft.themission.Task.MyTask;
-import com.ikarosoft.themission.Task.TaskModelFirebase;
-import com.ikarosoft.themission.Task.TaskModelSql;
+
 
 import java.util.List;
 
@@ -25,26 +23,26 @@ public class ProjectModel {
     private ProjectModel() {
     }
 
-   LiveData<List<MyProject>> taskList;
+    LiveData<List<MyProject>> taskList;
     SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-    String myPhone ;
+    String myPhone;
 
     public LiveData<List<MyProject>> getAllProject() {
         myPhone = sp.getString("myPhone", "0222222222");
-            taskList = modelSql.getAllProj(myPhone);
-            refreshAllProject(null);
+        taskList = modelSql.getAllProj(myPhone);
+        refreshAllProject(null);
         return taskList;
     }
 
     public void refreshAllProject(final ListenerVoid listener) {
 
-        Log.d("TAGf"," refreshAllProjec ");
+        Log.d("TAGf", " refreshAllProjec ");
 
         //1.get local last updeat data
         myPhone = sp.getString("myPhone", "0222222222");
-        long lastUpdated = sp.getLong("lastUpdatedProj"+myPhone, 0);
+        long lastUpdated = sp.getLong("lastUpdatedProj" + myPhone, 0);
         //2.get all update record from firebase form the last update data
-        modelFirebase.getAllProject(myPhone,lastUpdated, new MyListener<List<MyProject>>() {
+        modelFirebase.getAllProject(myPhone, lastUpdated, new MyListener<List<MyProject>>() {
             @Override
             public void onComplete(List<MyProject> result) {
 
@@ -59,7 +57,7 @@ public class ProjectModel {
                     }
                 }
                 //4.update the local last update date
-                sp.edit().putLong("lastUpdatedProj"+myPhone, lastU).commit();
+                sp.edit().putLong("lastUpdatedProj" + myPhone, lastU).commit();
 
                 //5.return the update data to the listeners
                 if (listener != null) {
@@ -70,11 +68,6 @@ public class ProjectModel {
         });
 
 
-
-    }
-
-    public void getProjectbyPhone(String phone, MyListener<MyProject> listener) {
-        modelFirebase.getProjectByPhone(phone, listener);
     }
 
     public void addProject(MyProject myProject, ListenerVoid listener) {
@@ -90,7 +83,6 @@ public class ProjectModel {
                 });
             }
         });
-        //modelSql.addTask(myTask,listener);
     }
 
     public void deleteProject(MyProject myProject, ListenerVoid listener) {

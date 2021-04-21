@@ -33,7 +33,6 @@ public class ProjectModelFirebase {
     List<MyProject> data;
 
     public void getAllProject(String myPhone,long lastUpdated, MyListener<List<MyProject>> listener) {
-        //TODO fix filter
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Timestamp ts = new Timestamp(lastUpdated, 0);
@@ -52,7 +51,6 @@ public class ProjectModelFirebase {
                                 pt.fromMap(doc.getData());
                                 if (pt.getUsersPhone().contains(myPhone)){
                                     data.add(pt);
-                                    Log.d("TAGBACKP", doc.getId() + " => " + doc.getData());
                                 }
 
                             }
@@ -91,26 +89,7 @@ public class ProjectModelFirebase {
 
     }
 
-    public void getProjectByPhone(String phone, MyListener<MyProject> listener) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("project").document(phone).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        MyProject myProject = null;
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot doc = task.getResult();
-                            if (doc != null) {
-                                myProject = new MyProject();
-                                myProject.fromMap(task.getResult().getData());
-                                //  task.getResult().toObject(MyTask.class);
-                            }
-                        }
-                        listener.onComplete(myProject);
 
-                    }
-                });
-    }
 
     public void deleteProjectO(MyProject myProject, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

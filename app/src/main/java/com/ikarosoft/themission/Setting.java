@@ -32,9 +32,9 @@ public class Setting extends Fragment {
         detail = view.findViewById(R.id.setting_tv_detail);
         sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
 
-        myPhone =sp.getString("myPhone", "nn");
+        myPhone = sp.getString("myPhone", "nn");
         myName = sp.getString("myName", "nn");
-        detail.setText(myPhone+" - "+myName);
+        detail.setText(myPhone + " - " + myName);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,6 @@ public class Setting extends Fragment {
 
             }
         });
-
 
 
         return view;

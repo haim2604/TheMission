@@ -21,7 +21,6 @@ public class ProjectAdapterViewModel extends ViewModel {
     }
 
 
-
     public LiveData<List<MyProject>> getData() {
         return data;
     }

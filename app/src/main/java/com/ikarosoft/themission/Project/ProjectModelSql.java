@@ -90,5 +90,4 @@ public class ProjectModelSql {
         }.execute();
     }
 
-    //all function - delete ,update...and more
 }

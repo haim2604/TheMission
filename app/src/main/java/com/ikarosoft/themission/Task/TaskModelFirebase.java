@@ -30,11 +30,9 @@ import java.util.List;
 
 
 public class TaskModelFirebase {
-    // Access a Cloud Firestore instance from your Activity
     List<MyTask> data;
 
     public void getAllTask(String myProject, long lastUpdated, MyListener<List<MyTask>> listener) {
-        //TODO fix filter
         data = new LinkedList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Timestamp ts = new Timestamp(lastUpdated, 0);

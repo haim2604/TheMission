@@ -40,7 +40,7 @@ public class AllProjectsFragment extends Fragment {
     ProjectAdapterViewModel viewModel;
     SwipeRefreshLayout sref;
     View view;
-
+    ProjectAdapter adapter=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,10 +76,7 @@ public class AllProjectsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         listProj.setLayoutManager(layoutManager);
 
-       // data = ProjectModelteee.instance.getAllTask();
-
-
-        ProjectAdapter adapter = new ProjectAdapter(viewModel,getLayoutInflater());
+        adapter = new ProjectAdapter(viewModel,getLayoutInflater());
         listProj.setAdapter(adapter);
 
         ItemTouchHelper helper= new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -102,25 +99,19 @@ public class AllProjectsFragment extends Fragment {
                                 ProjectModel.instance.deleteProject(project, new ListenerVoid() {
                                     @Override
                                     public void onComplete() {
-
                                     }
                                 });
 
-                                // Then you can remove this item from the adapter
                             }
                 });
                  builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
                                 public void onClick (DialogInterface dialog,int id){
                                     reloadData();
-                                    // User cancelled the dialog,
-                                    // so we will refresh the adapter to prevent hiding the item from UI
-                                 //   mAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+
                                 }
                             });
                 builder.create().show();
 
-                //livedata.remove(pos)
-                //reloada()
             }
         });
         helper.attachToRecyclerView(listProj);
@@ -130,7 +121,6 @@ public class AllProjectsFragment extends Fragment {
             public void onItemClick(int position) {
 
                 MyProject project=new MyProject();
-
 
                 project = viewModel.getData().getValue().get(position);
                 SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
@@ -180,25 +170,12 @@ public class AllProjectsFragment extends Fragment {
         });
 
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-////TODO meybe add in the final
-//        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-//        String selectProject = sp.getString("mySelectProject"+myPhone, "nn");
-//        if (!selectProject.equals("nn")){
-//            Navigation.findNavController(view).navigate(R.id.action_allProj_to_allMission);
-//
-//        }
+
+    public void onResume() {
+        super.onResume();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+
     }
-
-
-
-//    public void onResume() {
-//        super.onResume();
-//        if (adapter != null) {
-//            adapter.notifyDataSetChanged();
-//        }
-//
-//    }
 }

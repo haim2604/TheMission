@@ -73,16 +73,6 @@ public class TaskModel {
         });
 
 
-//        modelFirebase.getAllTask(new MyListener<List<MyTask>>() {
-//            @Override
-//            public void onComplete(List<MyTask> result) {
-//                taskList.setValue(result);
-//                listener.onComplete(null);
-//            }
-//        });
-
-        // modelSql.getAllTask(listener);
-
     }
 
     public void getTaskByPhone(String phone, MyListener<MyTask> listener) {
@@ -101,7 +91,6 @@ public class TaskModel {
                 });
             }
         });
-        //modelSql.addTask(myTask,listener);
     }
 
     public void deleteTask(MyTask myTask, ListenerVoid listener) {
@@ -135,7 +124,6 @@ public class TaskModel {
         modelSql.deleteAll();
     }
 
-    //public interface GetAllTask extends MyListener<>
 
 
 }

@@ -3,7 +3,7 @@ package com.ikarosoft.themission;
 import android.app.Application;
 import android.content.Context;
 
-public class MyApplication  extends Application {
+public class MyApplication extends Application {
     public static Context context;
 
     @Override

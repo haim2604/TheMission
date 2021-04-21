@@ -36,15 +36,13 @@ import java.util.List;
 public class NewProjectFragment extends Fragment {
     UserViewModel viewModel;
     Button addBtn;
-    Spinner sp2,sp3,sp4;
-    String[] usersItem;
+    Spinner sp2, sp3, sp4;
     View view;
-    EditText nameProj,description;
+    EditText nameProj, description;
     TextView tvmyphone;
-    String myPhone,myName;
-    String user1,user2,user3,user4;
+    String myPhone, myName;
+    String user1, user2, user3, user4;
     ProgressDialog progressDialog;
-
 
 
     @Override
@@ -62,36 +60,34 @@ public class NewProjectFragment extends Fragment {
         sp3 = view.findViewById(R.id.newproj_spinner_user3);
         sp4 = view.findViewById(R.id.newproj_spinner_user4);
 
-        addBtn=view.findViewById(R.id.newproj_btn_add);
+        addBtn = view.findViewById(R.id.newproj_btn_add);
 
 
         SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
         myPhone = sp.getString("myPhone", "0222222222");
         myName = sp.getString("myName", "0222222222");
-        user1=myName+" - "+myPhone;
+        user1 = myName + " - " + myPhone;
         tvmyphone.setText(user1);
 
-        List<String> data;
-        data = new LinkedList<>();
+        List<String> data= new LinkedList<>();
         data.add("NONE");
         UserModel.instance.refreshAllUser(new ListenerVoid() {
             @Override
             public void onComplete() {
                 int size;
-                if (viewModel.getData().getValue()==null){
-                    size= 0;
-                }else {
-                    size= viewModel.getData().getValue().size();
+                if (viewModel.getData().getValue() == null) {
+                    size = 0;
+                } else {
+                    size = viewModel.getData().getValue().size();
                 }
                 for (int i = 0; i < size; i++) {
                     User user = viewModel.getData().getValue().get(i);
-                    if (!user.getPhone().equals(myPhone)){
-                        data.add(user.getName()+" - "+user.getPhone());
+                    if (!user.getPhone().equals(myPhone)) {
+                        data.add(user.getName() + " - " + user.getPhone());
                     }
                 }
             }
         });
-
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, data);
@@ -104,12 +100,12 @@ public class NewProjectFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 user2 = sp2.getSelectedItem().toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                user2="NONE";
+                user2 = "NONE";
             }
         });
-
 
 
         sp3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,7 +116,7 @@ public class NewProjectFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                user3="NONE";
+                user3 = "NONE";
 
             }
         });
@@ -133,7 +129,7 @@ public class NewProjectFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                user4="NONE";
+                user4 = "NONE";
 
             }
         });
@@ -160,14 +156,14 @@ public class NewProjectFragment extends Fragment {
         progressDialog.setMessage("saving...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
-        MyProject project=new MyProject();
+        MyProject project = new MyProject();
         project.setNameTask(nameProj.getText().toString());
         project.setDescription(description.getText().toString());
         project.setStatusTask("start");
-        project.setUsersPhone(user1+"#"+user2+"#"+user3+"#"+user4);
-        Long tsLong = System.currentTimeMillis()/1000;
+        project.setUsersPhone(user1 + "#" + user2 + "#" + user3 + "#" + user4);
+        Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
-        project.setNumProj(nameProj.getText().toString()+ts);
+        project.setNumProj(nameProj.getText().toString() + ts);
         project.setDeleted(false);
         ProjectModel.instance.addProject(project, new ListenerVoid() {
             @Override
@@ -179,7 +175,6 @@ public class NewProjectFragment extends Fragment {
         });
 
     }
-
 
 
 }

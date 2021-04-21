@@ -90,37 +90,8 @@ public class UserModelFirebase {
 
     }
 
- /*   public void getUserByPhone(String phone, UserModel.GetUserListener listener) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(phone).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                User user = null;
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc = task.getResult();
-                    if( doc != null){
-                        user =task.getResult().toObject(User.class);
-                    }
-                }
-                listener.onComplete(user);
 
-            }
-        });
-    }*/
 
-    public void deleteUser(User user, UserModel.DeleteListener listener) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getPhone())
-                .delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        listener.onComplete();
-
-                    }
-                });
-
-    }
 
 
     public  void uploadImage(Bitmap bitmap,String name,final UserModel.UploadImageListener listener){
@@ -176,7 +147,7 @@ public class UserModelFirebase {
                             }
                             listener.onComplete(true);
 
-//
+
                         } else {
                             listener.onComplete(false);
 

@@ -44,10 +44,9 @@ import java.io.InputStream;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-
 public class PerframTaskFragment extends Fragment {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 0 ;
+    private static final int REQUEST_IMAGE_CAPTURE = 0;
     private static final int REQUEST_IMAGE_GALLERY = 1;
     private Bitmap imageBitmap;
 
@@ -63,9 +62,9 @@ public class PerframTaskFragment extends Fragment {
     String myPhone, myName;
     ProgressDialog progressDialog;
     SharedPreferences sp;
-    String users, status,url;
+    String users, status, url;
     String[] allUsers;
-    boolean photoChanged=false;
+    boolean photoChanged = false;
 
 
     @Override
@@ -99,9 +98,9 @@ public class PerframTaskFragment extends Fragment {
         users = myTask.getUsers() + " ";
         Log.d("TAG321", "userrt" + users);
         url = myTask.getUrlPhotoTask();
-        if(!url.equals("n")){
+        if (!url.equals("n")) {
             Picasso.get().load(url).into(img);
-        }else{
+        } else {
             img.setImageResource(R.drawable.clipboard);
         }
         allUsers = users.split("#");
@@ -114,11 +113,9 @@ public class PerframTaskFragment extends Fragment {
             } catch (Exception e) {
             }
 
-
         }
         status = "a";
         status = myTask.getStatusTask();
-        Log.d("TAG321", "selected" + status);
 
         switch (status) {
             case "start":
@@ -141,13 +138,11 @@ public class PerframTaskFragment extends Fragment {
                 break;
             case "Finished":
                 finished.setChecked(true);
-                flag=false;
+                flag = false;
                 break;
         }
 
         if ((myTask.getTakenByUser() != null)) {
-                Log.d("TAGBACKTC", "selected by  ");
-
             tekenBy.setText("selected by " + myTask.getTakenByUser());
             ((RadioButton) radioGroup.getChildAt(0)).setEnabled(false);
 
@@ -236,24 +231,24 @@ public class PerframTaskFragment extends Fragment {
         progressDialog.show();
         myTask.setStatusTask(status);
         myTask.setNote(note.getText().toString());
-        if(url.equals("n"))
-        if(selected.isChecked()){
-            myTask.setTakenByUser(myName+" - "+myPhone);
-        }
+        if (url.equals("n"))
+            if (selected.isChecked()) {
+                myTask.setTakenByUser(myName + " - " + myPhone);
+            }
 
-        myTask.setProgress(sbProgress.getProgress()+"");
+        myTask.setProgress(sbProgress.getProgress() + "");
 
-        if(photoChanged){
+        if (photoChanged) {
             BitmapDrawable drawable = (BitmapDrawable) img.getDrawable();
             Bitmap image = drawable.getBitmap();
 
             UserModel.instance.uploadImage(image, myTask.getNumberTask(), new UserModel.UploadImageListener() {
                 @Override
                 public void onComplate(String url) {
-                    if(url.equals(null)){
-                        Log.d("TAGNEW","url erorr to save");
+                    if (url.equals(null)) {
+                        Log.d("TAGNEW", "url erorr to save");
 
-                    }else {
+                    } else {
                         myTask.setUrlPhotoTask(url);
 
 
@@ -262,7 +257,7 @@ public class PerframTaskFragment extends Fragment {
 
                 }
             });
-        }else{
+        } else {
             sendTask();
         }
 
@@ -280,35 +275,31 @@ public class PerframTaskFragment extends Fragment {
 
         });
 
-
-
     }
-
 
     private void disable(boolean bo) {
         for (int i = 0; i < 4; i++) {
             ((RadioButton) radioGroup.getChildAt(i)).setEnabled(bo);
         }
-
     }
 
     private void tackPicture() {
-        final CharSequence[] option = {"Tack Photo","Chose form gallery","cancel"};
+        final CharSequence[] option = {"Tack Photo", "Chose form gallery", "cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("choose your profile pic");
         builder.setItems(option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(option[i].equals("Tack Photo")){
+                if (option[i].equals("Tack Photo")) {
                     Intent tackpicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(tackpicIntent, REQUEST_IMAGE_CAPTURE);
-                }else if(option[i].equals("Chose form gallery")){
+                } else if (option[i].equals("Chose form gallery")) {
                     // Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     //pickPhotoIntent.setType("image/*");
                     startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_GALLERY);
-                }else if(option[i].equals("cancel")){
+                } else if (option[i].equals("cancel")) {
                     dialogInterface.dismiss();
                 }
             }
@@ -320,20 +311,21 @@ public class PerframTaskFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && data != null) {
+        if (resultCode == RESULT_OK && data != null) {
 
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 Bundle extras = data.getExtras();
                 imageBitmap = (Bitmap) extras.get("data");
                 img.setImageBitmap(imageBitmap);
-                photoChanged=true;
-            }if (requestCode == REQUEST_IMAGE_GALLERY){
+                photoChanged = true;
+            }
+            if (requestCode == REQUEST_IMAGE_GALLERY) {
                 try {
                     final Uri imageUri = data.getData();
                     final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                     img.setImageBitmap(selectedImage);
-                    photoChanged=true;
+                    photoChanged = true;
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -341,9 +333,9 @@ public class PerframTaskFragment extends Fragment {
                 }
 
             }
-        }else  if (resultCode == RESULT_CANCELED) {
+        } else if (resultCode == RESULT_CANCELED) {
             //Write your code if there's no result
-        }else {
+        } else {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

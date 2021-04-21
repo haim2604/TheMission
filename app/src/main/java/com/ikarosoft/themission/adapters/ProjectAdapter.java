@@ -11,30 +11,25 @@ import com.ikarosoft.themission.ProjectAdapterViewModel;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.Project.MyProject;
 
-import java.util.List;
+public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder> {
 
-public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
-
-
-//    List<MyProject> data;
     ProjectAdapterViewModel viewModel;
-
     LayoutInflater layoutInflater;
 
 
-    public ProjectAdapter(ProjectAdapterViewModel viewModel, LayoutInflater layoutInflater){
+    public ProjectAdapter(ProjectAdapterViewModel viewModel, LayoutInflater layoutInflater) {
         this.viewModel = viewModel;
         this.layoutInflater = layoutInflater;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
     public OnItemClickListener listener;
 
-    public void setOnClickListener(OnItemClickListener listener){
-        this.listener= listener;
+    public void setOnClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
 
@@ -42,8 +37,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
     @Override
     public PojectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-          View view = layoutInflater.inflate(R.layout.porjectlist_row,null);
-          PojectViewHolder holder = new PojectViewHolder(view,listener);//1
+        View view = layoutInflater.inflate(R.layout.porjectlist_row, null);
+        PojectViewHolder holder = new PojectViewHolder(view, listener);//1
         return holder;
     }
 
@@ -51,14 +46,13 @@ public class ProjectAdapter extends RecyclerView.Adapter<PojectViewHolder>{
     public void onBindViewHolder(@NonNull PojectViewHolder holder, int position) {
         MyProject project = viewModel.getData().getValue().get(position);
 
-        holder.bindData(project,position);
+        holder.bindData(project, position);
     }
-
 
 
     @Override
     public int getItemCount() {
-        if (viewModel.getData().getValue()==null){
+        if (viewModel.getData().getValue() == null) {
             return 0;
         }
         return viewModel.getData().getValue().size();

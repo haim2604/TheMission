@@ -7,7 +7,6 @@
     android:background="@drawable/m1"
     tools:context=".fragment.AllMissionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <Button
         android:id="@+id/allmission_btn_setting"

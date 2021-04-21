@@ -21,7 +21,6 @@ public class UserViewModel extends ViewModel {
     }
 
 
-
     public LiveData<List<User>> getData() {
         return data;
     }
