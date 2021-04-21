@@ -23,7 +23,7 @@
         android:rotation="-13"
         android:text="TODO"
         android:textColor="@color/m_grean"
-        android:textSize="120sp"
+        android:textSize="100sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/login_username_et"
         app:layout_constraintEnd_toEndOf="parent"

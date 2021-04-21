@@ -3,6 +3,7 @@ package com.ikarosoft.themission.Task;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -42,6 +43,7 @@ public class TaskModel {
         //1.get local last updeat data
 
         myProject = sp.getString("myProject", "nn");
+        Log.d("TAGBACKC", myProject + " => myprojex");
 
         long lastUpdated = sp.getLong("lastUpdated", 0);
 
@@ -128,6 +130,10 @@ public class TaskModel {
         modelFirebase.uploadImage(bitmap, name, listener);
     }
 
+
+    public void deleteall() {
+        modelSql.deleteAll();
+    }
 
     //public interface GetAllTask extends MyListener<>
 

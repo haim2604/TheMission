@@ -36,11 +36,9 @@ import java.util.List;
 
 public class AllProjectsFragment extends Fragment {
     RecyclerView listProj;
-    List<MyProject> data;
     Button addPorjBtn,setting;
     ProjectAdapterViewModel viewModel;
     SwipeRefreshLayout sref;
-    String myPhone;
     View view;
 
 
@@ -160,9 +158,11 @@ public class AllProjectsFragment extends Fragment {
             @Override
             public void onChanged(List<MyProject> myTasks) {
                 adapter.notifyDataSetChanged();
+                Log.d("TAGBACKC", "proj is chang");
+
             }
         });
-      //  reloadData();
+       reloadData();
         return view;
     }
 

@@ -18,6 +18,7 @@ public class MissionViewHolder extends MyViewHolder   {
     TextView nameTask,des,statusTask;
     TextView tv;
     ImageView imageTask;
+    de.hdodenhof.circleimageview.CircleImageView circleImageView;
     int position;
 
     public MissionViewHolder(@NonNull View itemView, final MyAdapter.OnItemClickListener listener) {
@@ -26,7 +27,7 @@ public class MissionViewHolder extends MyViewHolder   {
         nameTask =itemView.findViewById(R.id.missionrow_tv_name);
         des=itemView.findViewById(R.id.missionrow_tv_des);
         statusTask=itemView.findViewById(R.id.missionrow_status_tv);
-        imageTask =itemView.findViewById(R.id.missionrow_avatar_iv);;
+        circleImageView =itemView.findViewById(R.id.missionrow_avatar_iv);;
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,10 +51,10 @@ public class MissionViewHolder extends MyViewHolder   {
         String url = task.getUrlPhotoTask();
 
         if(url.equals("n")||url.equals(null)){
-            imageTask.setImageResource(R.drawable.clipboard);
+            circleImageView.setImageResource(R.drawable.clipboard);
 
         }else{
-            Picasso.get().load(task.getUrlPhotoTask()).into(imageTask);
+            Picasso.get().load(task.getUrlPhotoTask()).into(circleImageView);
 
         }
     }

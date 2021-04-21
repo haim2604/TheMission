@@ -39,7 +39,7 @@ public class UserModelFirebase {
         Timestamp ts = new Timestamp(lastUpdated, 0);
 
         db.collection("users")
-                 .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .get()
                  .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -49,6 +49,8 @@ public class UserModelFirebase {
                                 User us = new User();
                                 us.fromMap(doc.getData());
                                 data.add(us);
+                                Log.d("TAGBACKU", doc.getId() + " => " + doc.getData());
+
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

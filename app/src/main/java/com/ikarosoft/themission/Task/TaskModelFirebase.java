@@ -40,8 +40,10 @@ public class TaskModelFirebase {
         Timestamp ts = new Timestamp(lastUpdated, 0);
 
         db.collection("task")
-                .whereGreaterThanOrEqualTo("lastUpdated", ts)
+               .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .whereEqualTo("numberProject", myProject)
+                //.whereEqualTo("isDeleted", "false")
+
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -51,8 +53,22 @@ public class TaskModelFirebase {
                                 MyTask tt = new MyTask();
                                 tt.fromMap(doc.getData());
 //                                MyTask tt = doc.toObject(MyTask.class);
+                                if (!tt.isDeleted()){
+                                    Log.d("TAGBACKTC", "false");
+
+                                }else {
+                                    Log.d("TAGBACKTC", "falsels");
+
+                                }
+                                if (tt.isDeleted()) {
+                                    Log.d("TAGBACKTC", "true");
+                                }else {
+                                    Log.d("TAGBACKTC", "trueels");
+
+                                }
+
                                 data.add(tt);
-                                Log.d("TAGBACK", doc.getId() + " => " + doc.getData());
+                                Log.d("TAGBACKT", doc.getId() + " => " + doc.getData());
 
                             }
                         } else {

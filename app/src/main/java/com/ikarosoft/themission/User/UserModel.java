@@ -242,4 +242,7 @@ public class UserModel {
        // modelfirebaseClass.uploadImage(bitmap, name, listener);
     }
 
+    public  void  deleteAll(){
+        modelSql.deleteAll();
+    }
 }

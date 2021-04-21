@@ -71,7 +71,24 @@ public class ProjectModelSql {
 
 
     }
+    public void dalALl(){
+        @SuppressLint("StaticFieldLeak")
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                AppLocalDB.db.projDao().nukeTable();
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                Log.d("TAGDELLLLL","DA:::::::::");
 
+
+
+            }
+        }.execute();
+    }
 
     //all function - delete ,update...and more
 }

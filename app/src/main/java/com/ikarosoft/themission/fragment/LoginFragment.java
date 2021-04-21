@@ -21,8 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.ikarosoft.themission.MyApplication;
 import com.ikarosoft.themission.MyListener;
+import com.ikarosoft.themission.Project.ProjectModel;
 import com.ikarosoft.themission.R;
 import com.ikarosoft.themission.Task.MyTask;
+import com.ikarosoft.themission.Task.TaskModel;
 import com.ikarosoft.themission.User.User;
 import com.ikarosoft.themission.User.UserModel;
 
@@ -104,12 +106,15 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-
-//        progressDialog = new ProgressDialog(getContext());
-//        progressDialog.setMessage("start...");
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
         myPhone = sp.getString("myPhone", "nn");
+
+
+//        TaskModel.instance.deleteall();
+//        ProjectModel.instance.deleteall();
+//       UserModel.instance.deleteAll();
+
+
+
         if (!myPhone.equals("nn")){
           //  progressDialog.setMessage("connect...");
             reload();

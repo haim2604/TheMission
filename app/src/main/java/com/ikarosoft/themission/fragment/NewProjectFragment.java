@@ -68,7 +68,7 @@ public class NewProjectFragment extends Fragment {
         SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
         myPhone = sp.getString("myPhone", "0222222222");
         myName = sp.getString("myName", "0222222222");
-        user1=myPhone+" - "+myName;
+        user1=myName+" - "+myPhone;
         tvmyphone.setText(user1);
 
         List<String> data;

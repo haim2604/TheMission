@@ -27,14 +27,12 @@ public class ProjectModel {
 
    LiveData<List<MyProject>> taskList;
     SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
-    String myPhone = sp.getString("myPhone", "0222222222");
+    String myPhone ;
 
     public LiveData<List<MyProject>> getAllProject() {
-
+        myPhone = sp.getString("myPhone", "0222222222");
             taskList = modelSql.getAllProj(myPhone);
-
             refreshAllProject(null);
-
         return taskList;
     }
 
@@ -43,8 +41,7 @@ public class ProjectModel {
         Log.d("TAGf"," refreshAllProjec ");
 
         //1.get local last updeat data
-
-        SharedPreferences sp = MyApplication.context.getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        myPhone = sp.getString("myPhone", "0222222222");
         long lastUpdated = sp.getLong("lastUpdatedProj"+myPhone, 0);
         //2.get all update record from firebase form the last update data
         modelFirebase.getAllProject(myPhone,lastUpdated, new MyListener<List<MyProject>>() {
@@ -104,6 +101,11 @@ public class ProjectModel {
             }
         });
     }
+
+    public void deleteall() {
+        modelSql.dalALl();
+    }
+
 
     public void uploadImage(Bitmap bitmap, String name, final MyListener<String> listener) {
         modelFirebase.uploadImage(bitmap, name, listener);

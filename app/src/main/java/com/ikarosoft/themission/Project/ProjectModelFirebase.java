@@ -52,7 +52,7 @@ public class ProjectModelFirebase {
                                 pt.fromMap(doc.getData());
                                 if (pt.getUsersPhone().contains(myPhone)){
                                     data.add(pt);
-                                    Log.d("TAGBACK", doc.getId() + " => " + doc.getData());
+                                    Log.d("TAGBACKP", doc.getId() + " => " + doc.getData());
                                 }
 
                             }

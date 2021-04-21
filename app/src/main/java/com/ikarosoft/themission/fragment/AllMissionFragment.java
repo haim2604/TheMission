@@ -187,6 +187,9 @@ public class AllMissionFragment extends Fragment {
 //                adapter = new MyAdapter(viewModel,getLayoutInflater());
 //                listMission.setAdapter(adapter);
 
+                    Log.d("TAGBACKC", "task is chang");
+
+
                 adapter.notifyDataSetChanged();
             }
         });

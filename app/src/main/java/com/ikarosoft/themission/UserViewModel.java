@@ -1,5 +1,7 @@
 package com.ikarosoft.themission;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -24,5 +26,11 @@ public class UserViewModel extends ViewModel {
         return data;
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Log.d("TAGBACKC", "oncler users");
+
+    }
 
 }
