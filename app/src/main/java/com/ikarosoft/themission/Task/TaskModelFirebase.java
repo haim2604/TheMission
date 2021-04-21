@@ -38,7 +38,7 @@ public class TaskModelFirebase {
         Timestamp ts = new Timestamp(lastUpdated, 0);
 
         db.collection("task")
-               .whereGreaterThanOrEqualTo("lastUpdated", ts)
+                .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .whereEqualTo("numberProject", myProject)
                 //.whereEqualTo("isDeleted", "false")
 
@@ -51,16 +51,16 @@ public class TaskModelFirebase {
                                 MyTask tt = new MyTask();
                                 tt.fromMap(doc.getData());
 //                                MyTask tt = doc.toObject(MyTask.class);
-                                if (!tt.isDeleted()){
+                                if (!tt.isDeleted()) {
                                     Log.d("TAGBACKTC", "false");
 
-                                }else {
+                                } else {
                                     Log.d("TAGBACKTC", "falsels");
 
                                 }
                                 if (tt.isDeleted()) {
                                     Log.d("TAGBACKTC", "true");
-                                }else {
+                                } else {
                                     Log.d("TAGBACKTC", "trueels");
 
                                 }
@@ -142,7 +142,8 @@ public class TaskModelFirebase {
                 .update("progress", myTask.getProgress()
                         , "note", myTask.getNote()
                         , "statusTask", myTask.getStatusTask()
-                        ,  "takenByUser" ,myTask.getTakenByUser() )
+                        , "takenByUser", myTask.getTakenByUser()
+                        , "urlPhotoTask", myTask.getUrlPhotoTask())
 
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
