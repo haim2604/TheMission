@@ -112,6 +112,18 @@ public class TaskModel {
         });
     }
 
+    public void updateTask(MyTask myTask, ListenerVoid listener) {
+        modelSql.addTask(myTask, new ListenerVoid() {
+            @Override
+            public void onComplete() {
+                modelFirebase.updateTask(myTask, listener);
+
+            }
+        });
+    }
+
+
+
     public void uploadImage(Bitmap bitmap, String name, final MyListener<String> listener) {
         modelFirebase.uploadImage(bitmap, name, listener);
     }

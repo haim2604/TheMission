@@ -84,13 +84,14 @@ public class LoginFragment extends Fragment {
         UserModel.instance.signIn(tempUser, new MyListener<Boolean>() {
             @Override
             public void onComplete(Boolean result) {
+                progressDialog.dismiss();
+
                 if (result) {
                     reload();
                 }else {
                   phone.getText().clear();
                   pass.getText().clear();
                   phone.setError("phone or password is incorrect");
-                  progressDialog.dismiss();
 
                 }
             }
@@ -104,16 +105,16 @@ public class LoginFragment extends Fragment {
         super.onStart();
 
 
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("start...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setMessage("start...");
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
         myPhone = sp.getString("myPhone", "nn");
         if (!myPhone.equals("nn")){
-            progressDialog.setMessage("connect...");
+          //  progressDialog.setMessage("connect...");
             reload();
         }else {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
         }
 
     }
@@ -124,7 +125,7 @@ public class LoginFragment extends Fragment {
        // sp.edit().putString("myPhone", myphone [0]).commit();
 
         Navigation.findNavController(view).navigate(R.id.action_logint_to_allProj);
-        progressDialog.dismiss();
+       // progressDialog.dismiss();
 
     }
 }

@@ -112,7 +112,7 @@ public class TaskModelFirebase {
     public void deleteTask(MyTask myTask, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("task").document(myTask.getNumberTask())
-                .update("isDeleted",true)
+                .update("isDeleted", true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -120,8 +120,25 @@ public class TaskModelFirebase {
 
                     }
                 });
-
     }
+
+    public void updateTask(MyTask myTask, ListenerVoid listener) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("task").document(myTask.getNumberTask())
+                .update("progress", myTask.getProgress()
+                        , "note", myTask.getNote()
+                        , "statusTask", myTask.getStatusTask()
+                        ,  "takenByUser" ,myTask.getTakenByUser() )
+
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        listener.onComplete();
+
+                    }
+                });
+    }
+
     public void deleteUser(MyTask myTask, ListenerVoid listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("task").document(myTask.getPhoneUser())
