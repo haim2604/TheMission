@@ -39,7 +39,7 @@ public class UserModelFirebase {
         Timestamp ts = new Timestamp(lastUpdated, 0);
 
         db.collection("users")
-                .whereGreaterThanOrEqualTo("lastUpdated", ts)
+            //    .whereGreaterThanOrEqualTo("lastUpdated", ts)
                 .get()
                  .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
